@@ -1,0 +1,254 @@
+﻿<Main:MainWindow x:Class="Main.WinMain2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ControlLib="clr-namespace:ControlLib;assembly=ControlLib"        
+        xmlns:HalconDotNet="clr-namespace:HalconDotNet;assembly=halcondotnet" 
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Camera="clr-namespace:Camera;assembly=Camera"        
+        xmlns:MetroControls="http://metro.mahapps.com/winfx/xaml/MetroControls" 
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Common="clr-namespace:Common;assembly=Common"
+        xmlns:DealLog="clr-namespace:DealLog;assembly=DealLog"
+        xmlns:DealResult="clr-namespace:DealResult;assembly=DealResult"
+        xmlns:DealConfigFile="clr-namespace:DealConfigFile;assembly=DealConfigFile"
+        xmlns:Main_EX="clr-namespace:Main_EX;assembly=Main_EX"
+        xmlns:Main="clr-namespace:Main"
+        xmlns:SetPar="clr-namespace:SetPar;assembly=SetPar"
+        Title="FineVision  (无锡尚实电子科技有限公司，www.shangshi-finevision.com，0510-81602063)" 
+        Height="785" Width="1300" WindowStartupLocation="CenterScreen" WindowState="Normal"  Icon="/Finevision;component/Images/finevision.ico"         
+        ResizeMode="CanResize" Topmost="true" Loaded="BaseWindow_Loaded" WindowStyle="ThreeDBorderWindow" Closing="BaseWindow_Closing" SizeChanged="BaseWindow_SizeChanged" StateChanged="Window_StateChanged" LocationChanged="WinInitMain_LocationChanged" Activated="WinInitMain_Activated">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />  Effect="{StaticResource ShadowWindow}"
+            </ResourceDictionary.MergedDictionaries>-->
+            <!--<DropShadowEffect x:Key="ShadowWindow" Color="Gray" Direction="270" ShadowDepth="2" BlurRadius="15" Opacity="1"/>-->
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="5" Background="#FFEDF7F4"  Name="gdRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Name="gdDisplay">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Stretch" Margin="1" Name="gdCamera" VerticalAlignment="Stretch"  >
+                
+            </Grid>
+            <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="0,2,0,0" Name="gdsMain" VerticalAlignment="Stretch" Width="1" Background="#FF00D1E5" DragDelta="gdsMain_DragDelta"  />
+
+            <Grid Grid.Column="2"  HorizontalAlignment="Stretch" Margin="0,2,0,0" Name="gdInfo" VerticalAlignment="Stretch" Grid.Row="1" Width="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="true" Margin="2,0,2,0" Grid.Row="0" Name="dpState"  MouseLeftButtonDown="dpState_MouseLeftButtonDown" >
+                    <TextBlock x:Name="txtState" Text="运行信息" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    <Popup Name="ppState" StaysOpen="False" Placement="Left">
+                        <Grid Background="White">
+                            <DealLog:UCStateWork HorizontalAlignment="Stretch" Margin="1" x:Name="uCStateWork" VerticalAlignment="Stretch" />
+                        </Grid>
+                    </Popup>
+                </DockPanel>
+
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="true" Margin="2" Grid.Row="1" Name="dpAlarm"  MouseLeftButtonDown="dpAlarm_MouseLeftButtonDown" >
+                    <TextBlock x:Name="txtAlarm" Text="报警信息" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    <Popup Name="ppAlarm" StaysOpen="False" Placement="Left">
+                        <Grid Background="White">
+                            <DealLog:UCAlarm HorizontalAlignment="Stretch" Margin="1" x:Name="uCAlarm" VerticalAlignment="Stretch"/>
+                        </Grid>
+                    </Popup>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="true" Margin="2" Grid.Row="2" Name="dpManual">
+                    <TextBlock x:Name="txtMannual" Text="操作设置" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    <Popup Name="popManual" StaysOpen="False" Placement="Left">
+                        <Grid Background="White" Width="400" Height="200" >
+                            <ControlLib:NGroupBox BorderBrush="#CC119EDA" BorderThickness="1" Header="操作设置" HorizontalAlignment="Stretch" Margin="0" Name="gpbTitle" TitleBrush="#FF00D1E5" VerticalAlignment="Stretch" Visibility="Visible"  Foreground="Black" >
+                                <Grid>
+
+                                </Grid>
+                            </ControlLib:NGroupBox>
+                        </Grid>
+                    </Popup>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="true" Grid.Row="3" Margin="2"  Name="dpData" MouseDown="dpData_MouseDown">
+                    <TextBlock x:Name="txtData" Text="运行数据" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    <Popup Name="popData" StaysOpen="False" Placement="Left" Width="400" Height="200">
+                        <Main_EX:UCDisplayMainResult HorizontalAlignment="Stretch" Margin="1" x:Name="uCResult" VerticalAlignment="Stretch" />
+                    </Popup>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="true" Grid.Row="4" Margin="2"  Name="dpCom" MouseDown="dpCom_MouseDown">
+                    <TextBlock x:Name="txtDelta" Text="补偿数据" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    <Popup Name="popCom" StaysOpen="False" Placement="Left" Width="400" Height="200">
+
+                    </Popup>
+                </DockPanel>
+
+            </Grid>
+        </Grid>
+        <Grid HorizontalAlignment="Stretch" Margin="0" Name="gdMenu" VerticalAlignment="Stretch" IsEnabled="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="642*" />
+                <ColumnDefinition Width="242*" />
+                <ColumnDefinition Width="424*" />
+            </Grid.ColumnDefinitions>
+            <Menu Height="25" HorizontalAlignment="Left" Background="#FFEDF7F4" Margin="0" Name="muSetting" VerticalAlignment="Center" MouseEnter="muSetting_MouseEnter">
+                <MenuItem x:Name="miConfig" Header="配置参数" FontSize="14" Width="75">
+                    <MenuItem Header="产品参数" Name="cmiConfigPar" Click="cmiConfigPar_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="调整值" Name="cimAdjust" Click="cimAdjust_Click" />
+                    <MenuItem Header="基准值" Click="cimStd_Click" Name="cimStd" />
+                    <Separator Background="White" />
+                    <MenuItem Header="运行模式设定" Name="cimTypeWork" Click="cimTypeWork_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="配置文件管理" Name="cimManageConfigPar" ToolTip="新建型号参数文件" Click="cimManageConfigPar_Click" />
+                    <!--<MenuItem Header="新建配置文件" Name="cimNewModel" Click="cimNewModel_Click" ToolTip="新建型号参数文件" />-->
+                    <MenuItem Header="切换配置文件" Name="cimChangeModel" Click="cimChangeModel_Click" ToolTip="产品参数换型" />
+                    <Separator Background="White" />
+                    <MenuItem Header="设置声音报警" Name="cimSetVoice" ToolTip="产品参数换型" Click="cimSetVoice_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="历史参数恢复" Name="cmiRecover" Click="cmiRecover_Click" />
+                    <Separator Background="White" />
+
+                </MenuItem>
+                <MenuItem Header="相机综合设置" FontSize="14" Width="110" x:Name="cmiComprehensive">
+                    <MenuItem Header="相机1综合设置" Name="cmiCamera1" Click="cmiCamera1_Click" />
+                    <MenuItem Header="相机2综合设置" Name="cmiCamera2" Click="cmiCamera2_Click" />
+                    <MenuItem Header="相机3综合设置" Name="cmiCamera3" Click="cmiCamera3_Click" />
+                    <MenuItem Header="相机4综合设置" Name="cmiCamera4" Click="cmiCamera4_Click" />
+                    <MenuItem Header="相机5综合设置" Name="cmiCamera5" Click="cmiCamera5_Click" />
+                    <MenuItem Header="相机6综合设置" Name="cmiCamera6" Click="cmiCamera6_Click" />
+                    <MenuItem Header="相机7综合设置" Name="cmiCamera7" Click="cmiCamera7_Click" />
+                    <MenuItem Header="相机8综合设置" Name="cmiCamera8" Click="cmiCamera8_Click" />
+
+                    <MenuItem Header="相机9综合设置" x:Name="cmiCamera9" Click="cmiCamera9_Click" />
+                    <MenuItem Header="相机10综合设置" x:Name="cmiCamera10" Click="cmiCamera10_Click" />
+                    <MenuItem Header="相机11综合设置" x:Name="cmiCamera11" Click="cmiCamera11_Click" />
+                    <MenuItem Header="相机12综合设置" x:Name="cmiCamera12" Click="cmiCamera12_Click" />
+
+                    <Separator Background="White" />
+                    <MenuItem Header="相机参数设置" Name="cmiSetCameraPar" Click="cmiSetCameraPar_Click" />
+                    <MenuItem Header="相机运行设置" Name="cimCameraWork" Click="cimCameraWork_Click" />
+                    <MenuItem Header="图像显示设置" Name="cimDisplayImage" Click="cimDisplayImage_Click" />
+                </MenuItem>
+                <MenuItem x:Name="cmiCommunication" Header="通信设置" FontSize="14" Width="75">
+                    <MenuItem Header="PLC" Name="cmiPLC" Click="cmiPLC_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="机器人通信" Name="cmiRobot" Click="cmiRobot_Click" />
+                    <MenuItem Header="机器人2通信" Name="cmiRobot2" Click="cmiRobot2_Click" />
+
+                    <Separator Background="White" />
+                    <MenuItem Header="通用端口" Name="cmiComInterface" Click="cmiComInterface_Click" Visibility="Hidden"/>
+                    <Separator Background="White" />
+                    <MenuItem Header="IO" Name="cmiIO" Click="cmiIO_Click" Visibility="Hidden"/>
+                </MenuItem>
+                <MenuItem x:Name="cimSystem" Header="系统设置" FontSize="14" Width="75">
+                    <MenuItem Header="登录权限设置" Name="cimSetLogin" Click="cimSetLogin_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="系统根目录设置" Name="cmiPathRoot" Click="cmiPathRoot_Click" />
+                    <Separator Background="White" />
+
+                    <MenuItem Header="内存记录设置" Name="cmiMemory" Click="cmiMemory_Click" />
+                    <MenuItem Header="存储空间监控设置" Name="cmiMonitorSpace" Click="cmiMonitorSpace_Click" />
+
+                    <Separator Background="White" />
+                    <MenuItem Header="文件删除设置" Name="cmiFolder" Click="cmiFolder_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="日志设置" Name="cmiLog" Click="cmiLog_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="设置" x:Name="cmiSetSys" Click="cmiSetSys_Click" />
+                </MenuItem>
+                <MenuItem Header="运行测试" Name="cmiManual" FontSize="14" Width="75">
+                    <MenuItem Header="模拟软件触发" Name="cmiManualPC" Click="cmiManualPC_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="模拟PLC触发" Name="cmiManualPLC" Click="cmiManualPLC_Click" />
+                    <MenuItem Header="PLC寄存器值监控" x:Name="cmiPLCValue" Click="cmiPLCValue_Click" />
+                    <MenuItem Header="PLC日志查看" x:Name="cmiPLCLog" Click="cmiPLCLog_Click" />
+                    <MenuItem Header="PLC读写实时日志" x:Name="cmiPLCReadWrite" Click="cmiPLCReadWrite_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="模拟通用端口触发" Name="cmiManualComInterface" Click="cmiManualComInterface_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="模拟机器人触发" Name="cmiManualRobot" Click="cmiManualRobot_Click" />
+                    <MenuItem Header="模拟机器人2触发" Name="cmiManualRobot2" Click="cmiManualRobot2_Click" />
+                    <MenuItem Header="重启机器人通信" Name="cmiRestartRobot" Click="cmiRestartRobot_Click" />
+                    <MenuItem Header="重启机器人2通信" Name="cmiRestartRobot2" Click="cmiRestartRobot2_Click" />
+                </MenuItem>
+
+               
+                <MenuItem x:Name="cmiOther" Header="其他" FontSize="14" Width="50">
+                    <MenuItem Header="CIM" Name="cmiCim" Click="cmiCim_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="计算器" Name="cmiCal" Click="cmiCal_Click" />
+                    <MenuItem Header="记事本" Name="cmiText" Click="cmiText_Click" />
+                    <MenuItem Header="画图板" Name="cmiPaint" Click="cmiPaint_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="拷贝文件" Name="cmiCopyFile" Click="cmiCopyFile_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="重启网卡" Name="cmiRestartNet" Click="cmiRestartNet_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="屏幕键盘" Name="cmiKeyboard" Click="cmiKeyboard_Click" />
+                    <Separator Background="White" />
+                    <MenuItem Header="窗体全屏" IsCheckable="True" Name="cmiMaxWin" IsChecked="False" Checked="cmiMaxWin_Checked" Unchecked="cmiMaxWin_Unchecked" />
+                    <Separator Background="White" />
+
+                    <MenuItem Header="关于" Name="cmiAbout" Click="cmiAbout_Click" />
+                </MenuItem>
+
+                <MenuItem Header="离线设置" Name="cmiOffline" FontSize="14" Width="75" MouseEnter="cmiOffline_MouseEnter" Visibility="Hidden">
+                    <MenuItem Header="相机离线" Name="cmiCameraOffline" IsCheckable="True" Checked="cmiCameraOffline_Checked" Unchecked="cmiCameraOffline_Unchecked" />
+                    <MenuItem Header="PLC离线" Name="cmiPLCOffline" IsCheckable="True" Checked="cmiPLCOffline_Checked" Unchecked="cmiPLCOffline_Unchecked" />
+                    <MenuItem Header="机器人离线" Name="cmiRobotOffline" IsCheckable="True" Checked="cmiRobotOffline_Checked" Unchecked="cmiRobotOffline_Unchecked" />
+                    <MenuItem Header="通用端口离线" Name="cmiComPortOffline" IsCheckable="True" />
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="0" x:Name="grid3" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1.5*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="自动运行" FontSize="16" FontStyle="Normal" FontWeight="Bold" Foreground="Green" Height="30" Margin="0" x:Name="lbStateMachine" VerticalAlignment="Center" HorizontalAlignment="Center" MouseDown="lbStateMachine_MouseDown"  />
+
+                <Popup PlacementTarget="{Binding ElementName=lbStateMachine}" x:Name="ppStateSoft" Margin="0" AllowsTransparency="True" Opacity="0" VerticalOffset="0" HorizontalOffset="0" Height="350" Width="510">
+                    <Main_EX:UCStateSoft x:Name="uCStateSoft" HorizontalAlignment="Stretch" Height="300" Margin="0" VerticalAlignment="Stretch" Width="500"/>
+                </Popup>
+
+
+                <Grid x:Name="gdLogin"  Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Image HorizontalAlignment="Center" Margin="0" x:Name="imLogin" Stretch="Fill" VerticalAlignment="Center" Height="33" Width="35" Source="/FineVision;component/Images/Logout.jpg" ToolTip="登录权限" MouseDown="imLogin_MouseDown" Grid.Column="0" />
+                    <Label Height="30" HorizontalAlignment="Center" Margin="0" x:Name="lbLogin" VerticalAlignment="Center" Width="100" Content="Logout" Foreground="#FFFF5C00" FontSize="14" FontWeight="Medium" FontStyle="Normal" MouseDown="imLogin_MouseDown" Grid.Column="1" />
+                </Grid>
+            </Grid>
+
+            <Popup PlacementTarget="{Binding ElementName=gdLogin}" x:Name="ppLogin" Margin="0" AllowsTransparency="True" Opacity="0" VerticalOffset="0" HorizontalOffset="0" Height="400" Width="490">
+                <SetPar:UCLogin x:Name="uCLogin" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Popup>
+
+            <Grid HorizontalAlignment="Stretch" Margin="0" Name="grid1" VerticalAlignment="Top" Height="35" Grid.Column="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <DealConfigFile:UCParProduct HorizontalAlignment="Stretch" Margin="0" x:Name="uCParProduct" VerticalAlignment="Center" Height="30" BorderBrush="#CC119EDA" BorderThickness="1" Grid.Column="0"/>
+                <Label Height="25" HorizontalAlignment="Center" Margin="0" Name="lblStateRun" VerticalAlignment="Center" Width="25" FontSize="14" FontWeight="Medium" FontStyle="Normal"  Background="LimeGreen" Grid.Column="2" MouseDoubleClick="lblStateRun_MouseDoubleClick" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Main:MainWindow>

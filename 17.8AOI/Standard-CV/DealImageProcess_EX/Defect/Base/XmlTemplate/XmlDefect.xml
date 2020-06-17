@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defect>
+  <MinGray>0</MinGray>
+  <MaxGray>255</MaxGray>
+  <MinArea>0</MinArea>
+  <CloseRadius>0</CloseRadius>
+  <OpenRadius></OpenRadius>
+  <MinCircularity>0</MinCircularity>
+  <MaxCircularity>0</MaxCircularity>
+  <MinRectangularity>0</MinRectangularity>
+  <MaxRectangularity>0</MaxRectangularity>
+
+  <MinWidth>0</MinWidth>
+  <MaxWidth>0</MaxWidth>
+  <MinHeight>0</MinHeight>
+  <MaxHeight>0</MaxHeight>
+
+  <MinX>0</MinX>
+  <MaxX>0</MaxX>
+  <MinY>0</MinY>
+  <MaxY>0</MaxY>
+</Defect>

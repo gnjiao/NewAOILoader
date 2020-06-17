@@ -1,0 +1,62 @@
+﻿<DealImageProcess:BaseUCImageProcess x:Class="DealImageProcess_EX.UCRaisedEdge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:assembly="clr-namespace:System;assembly=mscorlib"
+             xmlns:BasicClass="clr-namespace:BasicClass;assembly=BasicClass"
+             xmlns:DealImageProcess="clr-namespace:DealImageProcess;assembly=DealImageProcess" 
+             xmlns:ControlLib="clr-namespace:ControlLib;assembly=ControlLib"
+             xmlns:DealCalibrate="clr-namespace:DealCalibrate;assembly=DealCalibrate"
+             mc:Ignorable="d" 
+             Height="120" Width="600">
+    <UserControl.Resources >
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <ControlLib:NGroupBox Grid.Row="0" TitleBrush="#FF00D1E5" Foreground="Black" HorizontalAlignment="Stretch" Header="获取真实边缘">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="轮廓类型:" Height="28" HorizontalAlignment="Stretch" Margin="0" Name="lblOutlineType" VerticalAlignment="Center" Width="143" Grid.Row="0"/>
+                <ComboBox Grid.Column="1" Height="35" HorizontalAlignment="Center" Margin="0" Grid.Row="0" Name="cboOutlineType" VerticalAlignment="Center" Width="120" SelectionChanged="cboOutlineType_SelectionChanged">
+                    <ComboBoxItem Content="C角" IsSelected="True" />
+                    <ComboBoxItem Content="R角" />
+                    <ComboBoxItem Content="U角（内）"/>
+                    <ComboBoxItem Content="U角（外）"/>
+                </ComboBox>
+
+                <Label Content="直线交点单元:" Height="28" HorizontalAlignment="Stretch" Margin="4,4,0,4" Name="lblPolygon1" VerticalAlignment="Center" Width="143" Grid.Row="1" Grid.Column="2" />
+                <ComboBox Grid.Column="3" Height="35" HorizontalAlignment="Center" Grid.Row="1" Name="cboPolygon1" VerticalAlignment="Center" Width="120" SelectionChanged="cboPolygon1_SelectionChanged" />
+                <Label Content="缺陷类型:" Height="28" HorizontalAlignment="Stretch" Margin="0" Name="lblDefectType" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+                <ComboBox Grid.Column="3" Height="35" HorizontalAlignment="Center" Margin="0" Grid.Row="0" Name="cboDefectType" VerticalAlignment="Center" Width="120" SelectionChanged="cboDefectType_SelectionChanged">
+                    <ComboBoxItem Content="残留" IsSelected="True" />
+                    <ComboBoxItem Content="崩缺" />
+                </ComboBox>
+                <Label Content="产品在图片中的位置:" Height="28" HorizontalAlignment="Stretch" Margin="0" Name="lblPosition" VerticalAlignment="Center" Grid.Row="1" />
+                <ComboBox Grid.Column="1" Height="35" HorizontalAlignment="Center" Margin="0" Name="cboPosition" VerticalAlignment="Center" Width="120" Grid.Row="1" SelectionChanged="cboPosition_SelectionChanged">
+                    <ComboBoxItem Content="左下" IsSelected="True" />
+                    <ComboBoxItem Content="右下" />
+                    <ComboBoxItem Content="右上" />
+                    <ComboBoxItem Content="左上" />
+                </ComboBox>
+            </Grid>
+        </ControlLib:NGroupBox>
+    </Grid>
+</DealImageProcess:BaseUCImageProcess>

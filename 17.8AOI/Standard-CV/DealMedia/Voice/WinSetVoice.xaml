@@ -1,0 +1,60 @@
+﻿<BasicClass:BaseMetroWindow x:Class="DealMedia.WinSetVoice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls" 
+             xmlns:BasicClass="clr-namespace:BasicClass;assembly=BasicClass"
+             xmlns:ControlLib="clr-namespace:ControlLib;assembly=ControlLib" 
+             mc:Ignorable="d"             
+             Height="427" Width="690" 
+             BorderThickness="1" BorderBrush="#FF00D1E5" Loaded="BaseMetroWindow_Loaded" Topmost="True" WindowStartupLocation="CenterScreen" ShowMinButton="False" ShowMaxRestoreButton="False" Closing="BaseMetroWindow_Closing" Title="设置声音报警">
+
+    <Window.Resources >
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="313*" />
+            <RowDefinition Height="73*" />
+        </Grid.RowDefinitions>
+        <Image Height="190" HorizontalAlignment="Left" Margin="12,66,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="194" Source="/SetPar;component/Images/trumpet.png" />
+        <ControlLib:NGroupBox BorderBrush="#CC119EDA" BorderThickness="1" Foreground="White" Header="播放列表" Height="263" HorizontalAlignment="Left" Margin="215,20,0,0" Name="nGroupBox3" TitleBrush="#FF00D1E5" VerticalAlignment="Top" Width="439">
+            <Grid>
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Name="dgVoice" VerticalAlignment="Stretch"  BorderThickness="1" FontSize="15" GridLinesVisibility="All" SelectionUnit="FullRow" CanUserSortColumns="False" CanUserAddRows="False"  CanUserResizeColumns="False" HorizontalGridLinesBrush="#FF4BAEEF" VerticalGridLinesBrush="#FF4BAEEF" HeadersVisibility="All" Margin="0,0,0,6" CanUserResizeRows="False" EnableColumnVirtualization="True" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding No}" Header=""  Width="50" />
+                        <DataGridTextColumn Binding="{Binding NameVoice}" Header="名称"  Width="120" />
+                        <DataGridCheckBoxColumn Binding="{Binding BlExceute}" Header="执行"  Width="60" />
+                        <DataGridTemplateColumn Header="循环次数" Width="90" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ControlLib:DoubleUpDown Value="{Binding NumPlay}" Name="dudStdValue" ValueChanged="dudNumPlay_ValueChanged" Minimum="1" Maximum="5"></ControlLib:DoubleUpDown>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ControlLib:NGroupBox>
+        <Grid HorizontalAlignment="Stretch" Margin="0" Name="grid1" VerticalAlignment="Stretch" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ControlLib:ButtonColor Background="#FF88FFFF" Content="开始播放" FontSize="18" HorizontalAlignment="Center" Margin="0" Name="btnStart" ToolTip="选择区域之后需要右击鼠标" Width="125" Height="55" Click="btnStart_Click" />
+            <ControlLib:ButtonColor Background="#FF88FFFF" HorizontalAlignment="Center" Content="停止播放" FontSize="18" Margin="0" Name="btnStop" ToolTip="选择区域之后需要右击鼠标" Width="125" Height="55" Grid.Column="1" />
+            <ControlLib:ButtonColor Background="#FF88FFFF" Content="保  存" FontSize="18" HorizontalAlignment="Center" Margin="0" Name="btnSave" ToolTip="选择区域之后需要右击鼠标" Width="125" Height="55" Click="btnSave_Click" Grid.Column="2" />
+        </Grid>
+    </Grid>
+</BasicClass:BaseMetroWindow>

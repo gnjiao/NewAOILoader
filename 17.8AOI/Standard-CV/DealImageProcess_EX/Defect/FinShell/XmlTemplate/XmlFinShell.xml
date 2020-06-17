@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FinShell>
+  <Input>
+    <HObjectReference TypeParent="" TypeChild="" BlOverlap="" ColorOverlap="" NameCell="" Pos="">
+      <CellReference NameCell="" Type="" Annotation=""/>
+      <HObjectReference NameImage="" Function="" TypeHObject="" Annotation=""/>
+    </HObjectReference>
+  </Input>
+
+  <CellTemp>
+
+  </CellTemp>
+
+  <Par>
+    <NameCellActualEdge></NameCellActualEdge>
+    <Width_Paral>10</Width_Paral>
+    <OuterStdShift_Paral>0</OuterStdShift_Paral>
+    <InnerStdShift_Paral>0</InnerStdShift_Paral>
+    <WorkingRegion></WorkingRegion>
+    <ClosingCircle>0</ClosingCircle>
+    <OpeningCircle>0</OpeningCircle>
+    <MinWidth>0</MinWidth>
+    <MaxWidth>0</MaxWidth>
+    <MinHeight>0</MinHeight>
+    <MaxHeight>0</MaxHeight>
+    <MinArea>0</MinArea>
+    <MaxArea>0</MaxArea>
+    <SmallestSurround></SmallestSurround>
+    <TypeOutCoord></TypeOutCoord>
+  </Par>
+
+  <ROI Num="">
+    <HObjectReference TypeParent="" TypeChild="" BlOverlap="" ColorOverlap="" NameCell="" Pos="">
+      <CellReference NameCell="" Type="" Annotation=""/>
+      <HObjectReference NameImage="" Function="" TypeHObject="" Annotation=""/>
+    </HObjectReference>
+  </ROI>
+
+  <Std>
+    <X></X>
+    <Y></Y>
+    <R></R>
+    <R_J></R_J>
+    <Num></Num>
+    <Score></Score>
+    <Scale></Scale>
+  </Std>
+
+  <Preprocess UsingColorDecompose="" UsingBinary="">
+
+  </Preprocess>
+
+  <Output BlComprehensive="false">
+    <SetResultValueCom >
+      <ResultValueCom1 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom2 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom3 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom4 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom5 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom6 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom7 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom8 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom9 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom10 NameResult="" Expression="" Annotation=""/>
+    </SetResultValueCom>
+
+    <LogicBranch  NameCell="" TypeParent="" TypeChild="" Pos="">
+      <Condition>
+        <LogicCondition Condition=""/>
+        <ExpressionA  Expression="" Result=""/>
+        <ExpressionB  Expression="" Result=""/>
+      </Condition>
+    </LogicBranch>
+
+    <OK>
+      <ResultInfo BlDisplayResultInfo="false" SizeFont="12" ColorFont="spring green">
+        <Info0 Info="OK" Row="1" Column="0" BlExecute="fasle"/>
+        <Info1 Info="(X)" Row="2" Column="0" BlExecute="fasle"/>
+        <Info2 Info="(Y)" Row="3" Column="0" BlExecute="fasle"/>
+        <Info3 Info="(R)" Row="4" Column="0" BlExecute="fasle"/>
+        <Info4 Info="" Row="5" Column="0" BlExecute="fasle"/>
+        <Info5 Info="" Row="6" Column="0" BlExecute="fasle"/>
+        <Info6 Info="" Row="7" Column="0" BlExecute="fasle"/>
+        <Info7 Info="" Row="8" Column="0" BlExecute="fasle"/>
+        <Info8 Info="" Row="9" Column="0" BlExecute="fasle"/>
+        <Info9 Info="" Row="10" Column="0" BlExecute="fasle"/>
+      </ResultInfo>
+
+      <DisplayResultShape>
+        <Envelope BlDisplayEnvelope="false" WidthLineEnvelope="2" ColorEnvelope="spring green" TypeFill="margin"/>
+        <Cross BlDisplayCross="true" LengthCross="100" WidthLineCross="1" ColorCross="spring green"/>
+        <AssistCross BlDisplayAssistCross="false" LengthAssistCross="15" WidthLineAssistCross="1" ColorAssistCross="green"/>
+      </DisplayResultShape>
+    </OK>
+
+    <NG>
+      <ResultInfo BlDisplayResultInfo="false" SizeFont="12" ColorFont="red">
+        <Info0 Info="NG" Row="1" Column="0" BlExecute="fasle"/>
+        <Info1 Info="(X)" Row="2" Column="0" BlExecute="fasle"/>
+        <Info2 Info="(Y)" Row="3" Column="0" BlExecute="fasle"/>
+        <Info3 Info="(R)" Row="4" Column="0" BlExecute="fasle"/>
+        <Info4 Info="" Row="5" Column="0" BlExecute="fasle"/>
+        <Info5 Info="" Row="6" Column="0" BlExecute="fasle"/>
+        <Info6 Info="" Row="7" Column="0" BlExecute="fasle"/>
+        <Info7 Info="" Row="8" Column="0" BlExecute="fasle"/>
+        <Info8 Info="" Row="9" Column="0" BlExecute="fasle"/>
+        <Info9 Info="" Row="10" Column="0" BlExecute="fasle"/>
+      </ResultInfo>
+
+      <DisplayResultShape>
+        <Envelope BlDisplayEnvelope="false" WidthLineEnvelope="2" ColorEnvelope="red" TypeFill="margin"/>
+        <Cross BlDisplayCross="true" LengthCross="100" WidthLineCross="1" ColorCross="red"/>
+        <AssistCross BlDisplayAssistCross="false" LengthAssistCross="15" WidthLineAssistCross="1" ColorAssistCross="green"/>
+      </DisplayResultShape>
+    </NG>
+
+    <LogResultValue Num="6">
+      <ResultValue0 NameResult="XBegin" BlLog="True" Annotation="起点X" />
+      <ResultValue1 NameResult="YBegin" BlLog="True" Annotation="起点Y" />
+      <ResultValue2 NameResult="XEnd" BlLog="True" Annotation="终点X" />
+      <ResultValue3 NameResult="YEnd" BlLog="True" Annotation="终点Y" />
+      <ResultValue4 NameResult="K" BlLog="True" Annotation="斜率" />
+      <ResultValue5 NameResult="R_J" BlLog="True" Annotation="角度(°)" />
+    </LogResultValue>
+  </Output>
+
+  <Record NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1" BlUsingDebugShow="True">
+    <HObjectReference NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1">
+      <HObjectReference NameImage="CameraImage" Function="" TypeHObject="Image" Annotation="原始图像" />
+      <Overlap BlOverlap="True" ColorOverlap="red" TypeFill="margin" />
+      <BlDisplay Num="3">
+        <BlDisplay0 Function="" NameImage="CameraImage" Type="Image" />
+        <BlDisplay1 Function="FunScaledShape" NameImage="RegionROI" Type="Region" />
+        <BlDisplay2 Function="FunScaledShape" NameImage="ModelXld_L" Type="XLD_L" />
+      </BlDisplay>
+      <BlRecord Num="1">
+        <BlRecord0 Function="" NameImage="CameraImage" Type="Image" />
+      </BlRecord>
+    </HObjectReference>
+    <CellExecuteReference NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1" NumCell="0" />
+  </Record>
+</FinShell>

@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0997E87-4BBB-448D-BB72-F4F67C9DE067}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DealImageProcess_EX</RootNamespace>
+    <AssemblyName>DealImageProcess_EX</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BasicClass, Version=1.0.2018.1229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\BasicClass.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicComprehensive, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\BasicComprehensive.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicDisplay, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\BasicDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Metro">
+      <HintPath>..\DLL\Caliburn.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Metro.Core">
+      <HintPath>..\DLL\Caliburn.Metro.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\DLL\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Camera, Version=1.0.2018.1222, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Camera.dll</HintPath>
+    </Reference>
+    <Reference Include="Common, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlLib, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\ControlLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DealAlgorithm, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealAlgorithm.dll</HintPath>
+    </Reference>
+    <Reference Include="DealCalibrate, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealCalibrate.dll</HintPath>
+    </Reference>
+    <Reference Include="DealConfigFile, Version=1.0.2018.1229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealConfigFile.dll</HintPath>
+    </Reference>
+    <Reference Include="DealConfigParAligner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealConfigParAligner.dll</HintPath>
+    </Reference>
+    <Reference Include="DealDisplay, Version=1.0.2018.1217, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="DealDraw, Version=1.0.2018.1231, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealDraw.dll</HintPath>
+    </Reference>
+    <Reference Include="DealFile">
+      <HintPath>..\DLL\DealFile.dll</HintPath>
+    </Reference>
+    <Reference Include="DealGeometry, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealGeometry.dll</HintPath>
+    </Reference>
+    <Reference Include="DealGrabImage, Version=1.0.2018.1217, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealGrabImage.dll</HintPath>
+    </Reference>
+    <Reference Include="DealImageProcess, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealImageProcess.dll</HintPath>
+    </Reference>
+    <Reference Include="DealInOutput, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealInOutput.dll</HintPath>
+    </Reference>
+    <Reference Include="DealLog, Version=1.0.2018.1229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealLog.dll</HintPath>
+    </Reference>
+    <Reference Include="DealResult, Version=1.0.2018.1219, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DealResult.dll</HintPath>
+    </Reference>
+    <Reference Include="halcondotnet">
+      <HintPath>..\DLL\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\DLL\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\DLL\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\DLL\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Design">
+      <HintPath>..\DLL\WPFToolkit.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\DLL\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseDealImageProcess_EX.cs" />
+    <Compile Include="Defect\Base\Par\BaseParDefect.cs" />
+    <Compile Include="Defect\Base\UI\BaseUCDefect.xaml.cs">
+      <DependentUpon>BaseUCDefect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\FinShell\Par\ParFinShell.cs" />
+    <Compile Include="Defect\FinShell\UI\UCFinShell.xaml.cs">
+      <DependentUpon>UCFinShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\FinShell\UI\WinFinShell.xaml.cs">
+      <DependentUpon>WinFinShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\LinesDotsPosNegInspect\Par\ParLinesDotsPosNegInspect.cs" />
+    <Compile Include="Defect\LinesDotsPosNegInspect\UI\UCLinesDotsPosNegInspect.xaml.cs">
+      <DependentUpon>UCLinesDotsPosNegInspect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\LinesDotsPosNegInspect\UI\WinLinesDotsPosNegInspect.xaml.cs">
+      <DependentUpon>WinLinesDotsPosNegInspect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\RaisedEdge\Par\ParRaisedEdge.cs" />
+    <Compile Include="Defect\RaisedEdge\Par\ParRaisedEdgeSmooth.cs" />
+    <Compile Include="Defect\RaisedEdge\Par\ParSmooth.cs" />
+    <Compile Include="Defect\RaisedEdge\UI\UCRaisedEdge.xaml.cs">
+      <DependentUpon>UCRaisedEdge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\RaisedEdge\UI\UCRaisedSmoothingEdge.xaml.cs">
+      <DependentUpon>UCRaisedSmoothingEdge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\RaisedEdge\UI\UCSmoothing.xaml.cs">
+      <DependentUpon>UCSmoothing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Defect\RaisedEdge\UI\WinRaisedEdge.xaml.cs">
+      <DependentUpon>WinRaisedEdge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Type\TypeImageProcess_EX.xaml.cs">
+      <DependentUpon>TypeImageProcess_EX.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DealResult_EX\DealResult_EX.csproj">
+      <Project>{03D4ADBC-D00B-4B11-885F-26AEA8CDD821}</Project>
+      <Name>DealResult_EX</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Defect\Base\UI\BaseUCDefect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\FinShell\UI\UCFinShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\FinShell\UI\WinFinShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\LinesDotsPosNegInspect\UI\UCLinesDotsPosNegInspect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\LinesDotsPosNegInspect\UI\WinLinesDotsPosNegInspect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\RaisedEdge\UI\UCRaisedEdge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\RaisedEdge\UI\UCRaisedSmoothingEdge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\RaisedEdge\UI\UCSmoothing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Defect\RaisedEdge\UI\WinRaisedEdge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Type\TypeImageProcess_EX.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Defect\Base\XmlTemplate\XmlDefect.xml" />
+    <Resource Include="Defect\FinShell\XmlTemplate\XmlFinShell.xml" />
+    <Resource Include="Defect\LinesDotsPosNegInspect\XmlTemplate\XmlFunLinesDotsPosNegInspect.xml" />
+    <Resource Include="Defect\RaisedEdge\XmlTemplate\XmlRaisedEdge.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Defect\Base\Function\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Type\XmlTemplate\XmlImageProcess_EX.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

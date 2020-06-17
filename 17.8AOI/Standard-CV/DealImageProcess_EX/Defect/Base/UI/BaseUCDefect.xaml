@@ -1,0 +1,71 @@
+﻿<DealImageProcess:BaseUCImageProcess x:Class="DealImageProcess_EX.BaseUCDefect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ControlLib="clr-namespace:ControlLib;assembly=ControlLib"
+             xmlns:BasicClass="clr-namespace:BasicClass;assembly=BasicClass"
+             xmlns:DealImageProcess="clr-namespace:DealImageProcess;assembly=DealImageProcess" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="541">
+    <Grid>
+        <ControlLib:NGroupBox Header="设置参数" HorizontalAlignment="Stretch" Name="gpbCamera" VerticalAlignment="Stretch" TitleBrush="#FF00D1E5" BorderBrush="#CC119EDA" BorderThickness="1" Margin="0,0,0,0" Foreground="Black" >
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="最小灰度:" Height="25" Margin="0" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Increment="1" Margin="0" Maximum="255" Minimum="0" Name="dudMinGray" Value="0" ValueChanged="dudMinGray_ValueChanged" VerticalAlignment="Stretch" Grid.Column="1" Width="100" Height="35"/>
+                <Label Content="最大灰度:" Height="25" Margin="0" Grid.Column="2" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Increment="1" Margin="0" Maximum="255" Minimum="0" Name="dudMaxGray" Value="255" ValueChanged="dudMaxGray_ValueChanged" Grid.Column="3" Width="100" Height="35"/>
+                <Label Content="面积筛选 Min:" Height="25" Margin="0" Grid.Row="2" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Margin="0" Minimum="0" Name="dudMinArea" Value="1" Grid.Column="1" Width="100" Height="35" Grid.Row="2" ValueChanged="dudMinArea_ValueChanged" />
+                <Label Content="面积筛选 Max:" Height="25" Margin="0" Grid.Column="2" Grid.Row="2" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Margin="0" Minimum="0" Name="dudMaxArea" Value="1000" Grid.Column="3" Grid.Row="2" Width="100" Height="35" ValueChanged="dudMaxArea_ValueChanged" />
+                <Label Content="圆度 Min:" Height="25" Margin="0" HorizontalAlignment="Left" Width="103" Grid.Row="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Increment="0.01" Margin="0" Maximum="1" Minimum="0" Name="dudMinCircularity" Value="0.7" Grid.Column="1" Width="100" Height="35" Grid.Row="3" ValueChanged="dudMinCircularity_ValueChanged" />
+                <Label Content="圆度 Max:" Height="25" Margin="0" Grid.Column="2" Grid.Row="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Increment="1" Margin="0" Minimum="0" Name="dudMaxCircularity" Value="1" Grid.Column="3" Width="100" Height="35" Grid.Row="3" ValueChanged="dudMaxCircularity_ValueChanged" Maximum="1" />
+                <Label Content="剔除细小毛刺:" Height="25" Margin="0" Grid.Row="1" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35" Increment="1" Margin="0" Minimum="0" Name="dudOpenRadius" ToolTip="开运算系数" Value="15" Width="100" Grid.Column="1" Grid.Row="1" ValueChanged="dudOpenRadius_ValueChanged" />
+                <Label Content="剔除细小孔洞:" Grid.Column="2" Height="25" Margin="0" Grid.Row="1" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Margin="0" Minimum="0" Name="dudCloseRadius" ToolTip="闭运算系数" Value="15" Width="100" Grid.Row="1" ValueChanged="dudCloseRadius_ValueChanged" />
+                <Label Content="矩形度 Min:" Height="25" HorizontalAlignment="Left" Margin="0" Width="103" Grid.Row="5" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="1" Height="35" Increment="0.01" Margin="0" Maximum="1" Minimum="0" Name="dudMinRectangularity" Value="0.7" Width="100" Grid.Row="5" ValueChanged="dudMinRectangularity_ValueChanged" />
+                <Label Content="矩形度 Max:" Grid.Column="2" Height="25" Margin="0" Grid.Row="5" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Increment="0.01" Margin="0" Minimum="1" Name="dudMaxRectangularity" Value="1" Width="100" Grid.Row="5" ValueChanged="dudMaxRectangularity_ValueChanged" Maximum="1" />
+                <Label Content="宽度 Min:" Height="25" HorizontalAlignment="Left" Margin="0" Width="103" Grid.Row="6" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="1" Height="35" Increment="0.01" Margin="0" Maximum="Infinity" Minimum="0" Name="dudMinWidth" Value="0.7" Width="100" Grid.Row="6" ValueChanged="dudMinWidth_ValueChanged" />
+                <Label Content="宽度 Max:" Grid.Column="2" Height="25" Margin="0" Grid.Row="6" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Increment="0.01" Margin="0" Minimum="0" Name="dudMaxWidth" Value="1" Width="100" Grid.Row="6" ValueChanged="dudMaxWidth_ValueChanged" />
+                <Label Content="高度 Min:" Height="25" HorizontalAlignment="Stretch" Margin="0" Grid.Row="7" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="1" Height="35" Increment="0.01" Margin="0" Maximum="Infinity" Minimum="0" Name="dudMinHeight" Value="0.7" Width="100" Grid.Row="7" ValueChanged="dudMinHeight_ValueChanged" />
+                <Label Content="高度 Max:" Grid.Column="2" Height="25" Margin="0" Grid.Row="7" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Increment="0.01" Margin="0" Minimum="0" Name="dudMaxHeight" Value="1" Width="100" Grid.Row="7" ValueChanged="dudMaxHeight_ValueChanged" />
+                <Label Content="中心点X Min:" Height="25" HorizontalAlignment="Stretch" Margin="0" Grid.Row="8" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="1" Height="35" Increment="0.01" Margin="0" Maximum="Infinity" Minimum="0" Name="dudMinX" Value="0.7" Width="100" Grid.Row="8" ValueChanged="dudMinX_ValueChanged" />
+                <Label Content="中心点X Max:" Grid.Column="2" Height="25" Margin="0" Grid.Row="8" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Increment="0.01" Margin="0" Minimum="0" Name="dudMaxX" Value="1" Width="100" Grid.Row="8" ValueChanged="dudMaxX_ValueChanged" />
+                <Label Content="中心点Y Min:" Height="25" HorizontalAlignment="Stretch" Margin="0" Grid.Row="9" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="1" Height="35" Increment="0.01" Margin="0" Maximum="Infinity" Minimum="0" Name="dudMinY" Value="0.7" Width="100" Grid.Row="9" ValueChanged="dudMinY_ValueChanged" />
+                <Label Content="中心点Y Max:" Grid.Column="2" Height="25" Margin="0" Grid.Row="9" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Column="3" Height="35" Increment="0.01" Margin="0" Minimum="0" Name="dudMaxY" Value="1" Width="100" Grid.Row="9" ValueChanged="dudMaxY_ValueChanged" />
+            </Grid>
+        </ControlLib:NGroupBox>
+    </Grid>
+</DealImageProcess:BaseUCImageProcess>

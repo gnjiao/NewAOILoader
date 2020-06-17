@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RaisedEdgeSmooth>
+  <Input>
+    <HObjectReference TypeParent="" TypeChild="" BlOverlap="" ColorOverlap="" NameCell="" Pos="">
+      <CellReference NameCell="" Type="" Annotation=""/>
+      <HObjectReference NameImage="" Function="" TypeHObject="" Annotation=""/>
+    </HObjectReference>
+  </Input>
+
+  <CellTemp>
+
+  </CellTemp>
+
+  <RaisedEdge>
+    <Par>
+      <OutlineType>0</OutlineType>
+      <DefectType>Fin</DefectType>
+      <NameCellPolygon1></NameCellPolygon1>
+      <NameCellPolygon2></NameCellPolygon2>
+    </Par>
+  </RaisedEdge>
+
+  <Smooth>
+    <Par>
+      <Position>左上</Position>
+      <DefectType>Shell</DefectType>
+      <Num>10</Num>
+      <SmoothValue>181</SmoothValue>
+      <SelectAreaLow>50</SelectAreaLow>
+      <ErrorAreaValue>2</ErrorAreaValue>
+      <DilationDefectValue>3</DilationDefectValue>
+      <GapIn>2</GapIn>
+      <GapOut>34</GapOut>
+    </Par>
+  </Smooth>
+  
+  <ROI Num="">
+    <HObjectReference TypeParent="" TypeChild="" BlOverlap="" ColorOverlap="" NameCell="" Pos="">
+      <CellReference NameCell="" Type="" Annotation=""/>
+      <HObjectReference NameImage="" Function="" TypeHObject="" Annotation=""/>
+    </HObjectReference>
+  </ROI>
+
+  <Std>
+    <X></X>
+    <Y></Y>
+    <R></R>
+    <R_J></R_J>
+    <Num></Num>
+    <Score></Score>
+    <Scale></Scale>
+  </Std>
+  <Preprocess NameCell="C9" TypeParent="" TypeChild="" Pos="1" NoCamera="1" BlExecute="True">
+    <CreateProcess NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1" BlExecute="False">
+      <CreatePreprocess1 NameAlgorithm="二值化" BlExecute="True" Annotation="">
+        <CellReference NameCell="Null" Pos="0" Type="" Annotation="" BlDisplay="False" NameCellComResult="Null" />
+      </CreatePreprocess1>
+      <CreatePreprocess2 NameAlgorithm="Null" BlExecute="True" Annotation="">
+        <CellReference NameCell="Null" Pos="0" Type="" Annotation="" BlDisplay="False" NameCellComResult="Null" />
+      </CreatePreprocess2>
+      <CreatePreprocess3 NameAlgorithm="Null" BlExecute="True" Annotation="">
+        <CellReference NameCell="Null" Pos="0" Type="" Annotation="" BlDisplay="False" NameCellComResult="Null" />
+      </CreatePreprocess3>
+      <CreatePreprocess4 NameAlgorithm="Null" BlExecute="True" Annotation="">
+        <CellReference NameCell="Null" Pos="0" Type="" Annotation="" BlDisplay="False" NameCellComResult="Null" />
+      </CreatePreprocess4>
+      <CreatePreprocess5 NameAlgorithm="Null" BlExecute="True" Annotation="">
+        <CellReference NameCell="Null" Pos="0" Type="" Annotation="" BlDisplay="False" NameCellComResult="Null" />
+      </CreatePreprocess5>
+    </CreateProcess>
+    <Binary TypeParent="" TypeChild="" Pos="1" NoCamera="1" BlExecute="True">     
+      <TypeBinary>Threshold</TypeBinary>
+      <Thresh MinGray="0" MaxGray="240" />
+      <Dyn MaskX="200" MaskY="200" Offset="25" TypeLightDyn_e="light" />
+      <Dilation>0</Dilation>
+      <OpenRadius>0</OpenRadius>
+      <CloseRadius>5</CloseRadius>
+      <MinArea>2000</MinArea>
+      <MaxArea>99999999</MaxArea>
+      <MinHeight>1</MinHeight>
+      <MaxHeight>99999</MaxHeight>
+      <MinWidth>1</MinWidth>
+      <MaxWidth>99999</MaxWidth>
+      <Fillup>True</Fillup>
+      <BackgroundGray>0</BackgroundGray>
+      <TypeOutBinary>Image</TypeOutBinary>
+     
+    </Binary>
+  </Preprocess>
+
+  <Output BlComprehensive="false">
+    <SetResultValueCom >
+      <ResultValueCom1 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom2 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom3 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom4 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom5 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom6 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom7 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom8 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom9 NameResult="" Expression="" Annotation=""/>
+      <ResultValueCom10 NameResult="" Expression="" Annotation=""/>
+    </SetResultValueCom>
+
+    <LogicBranch  NameCell="" TypeParent="" TypeChild="" Pos="">
+      <Condition>
+        <LogicCondition Condition=""/>
+        <ExpressionA  Expression="" Result=""/>
+        <ExpressionB  Expression="" Result=""/>
+      </Condition>
+    </LogicBranch>
+
+    <OK>
+      <ResultInfo BlDisplayResultInfo="false" SizeFont="12" ColorFont="spring green">
+        <Info0 Info="OK" Row="1" Column="0" BlExecute="fasle"/>
+        <Info1 Info="(X)" Row="2" Column="0" BlExecute="fasle"/>
+        <Info2 Info="(Y)" Row="3" Column="0" BlExecute="fasle"/>
+        <Info3 Info="(R)" Row="4" Column="0" BlExecute="fasle"/>
+        <Info4 Info="" Row="5" Column="0" BlExecute="fasle"/>
+        <Info5 Info="" Row="6" Column="0" BlExecute="fasle"/>
+        <Info6 Info="" Row="7" Column="0" BlExecute="fasle"/>
+        <Info7 Info="" Row="8" Column="0" BlExecute="fasle"/>
+        <Info8 Info="" Row="9" Column="0" BlExecute="fasle"/>
+        <Info9 Info="" Row="10" Column="0" BlExecute="fasle"/>
+      </ResultInfo>
+
+      <DisplayResultShape>
+        <Envelope BlDisplayEnvelope="false" WidthLineEnvelope="2" ColorEnvelope="spring green" TypeFill="margin"/>
+        <Cross BlDisplayCross="true" LengthCross="100" WidthLineCross="1" ColorCross="spring green"/>
+        <AssistCross BlDisplayAssistCross="false" LengthAssistCross="15" WidthLineAssistCross="1" ColorAssistCross="green"/>
+      </DisplayResultShape>
+    </OK>
+
+    <NG>
+      <ResultInfo BlDisplayResultInfo="false" SizeFont="12" ColorFont="red">
+        <Info0 Info="NG" Row="1" Column="0" BlExecute="fasle"/>
+        <Info1 Info="(X)" Row="2" Column="0" BlExecute="fasle"/>
+        <Info2 Info="(Y)" Row="3" Column="0" BlExecute="fasle"/>
+        <Info3 Info="(R)" Row="4" Column="0" BlExecute="fasle"/>
+        <Info4 Info="" Row="5" Column="0" BlExecute="fasle"/>
+        <Info5 Info="" Row="6" Column="0" BlExecute="fasle"/>
+        <Info6 Info="" Row="7" Column="0" BlExecute="fasle"/>
+        <Info7 Info="" Row="8" Column="0" BlExecute="fasle"/>
+        <Info8 Info="" Row="9" Column="0" BlExecute="fasle"/>
+        <Info9 Info="" Row="10" Column="0" BlExecute="fasle"/>
+      </ResultInfo>
+
+      <DisplayResultShape>
+        <Envelope BlDisplayEnvelope="false" WidthLineEnvelope="2" ColorEnvelope="red" TypeFill="margin"/>
+        <Cross BlDisplayCross="true" LengthCross="100" WidthLineCross="1" ColorCross="red"/>
+        <AssistCross BlDisplayAssistCross="false" LengthAssistCross="15" WidthLineAssistCross="1" ColorAssistCross="green"/>
+      </DisplayResultShape>
+    </NG>
+
+    <LogResultValue Num="6">
+      <ResultValue0 NameResult="XBegin" BlLog="True" Annotation="起点X" />
+      <ResultValue1 NameResult="YBegin" BlLog="True" Annotation="起点Y" />
+      <ResultValue2 NameResult="XEnd" BlLog="True" Annotation="终点X" />
+      <ResultValue3 NameResult="YEnd" BlLog="True" Annotation="终点Y" />
+      <ResultValue4 NameResult="K" BlLog="True" Annotation="斜率" />
+      <ResultValue5 NameResult="R_J" BlLog="True" Annotation="角度(°)" />
+    </LogResultValue>
+  </Output>
+
+  <Record NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1" BlUsingDebugShow="True">
+    <HObjectReference NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1">
+      <HObjectReference NameImage="CameraImage" Function="" TypeHObject="Image" Annotation="原始图像" />
+      <Overlap BlOverlap="True" ColorOverlap="red" TypeFill="margin" />
+      <BlDisplay Num="3">
+        <BlDisplay0 Function="" NameImage="CameraImage" Type="Image" />
+        <BlDisplay1 Function="FunScaledShape" NameImage="RegionROI" Type="Region" />
+        <BlDisplay2 Function="FunScaledShape" NameImage="ModelXld_L" Type="XLD_L" />
+      </BlDisplay>
+      <BlRecord Num="1">
+        <BlRecord0 Function="" NameImage="CameraImage" Type="Image" />
+      </BlRecord>
+    </HObjectReference>
+    <CellExecuteReference NameCell="" TypeParent="" TypeChild="" Pos="0" NoCamera="1" NumCell="0" />
+  </Record>
+</RaisedEdgeSmooth>

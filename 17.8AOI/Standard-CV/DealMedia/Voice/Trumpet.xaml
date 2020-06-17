@@ -1,0 +1,8 @@
+﻿<Window x:Class="DealMedia.Trumpet"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Trumpet" Height="250" Width="250" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image HorizontalAlignment="Stretch" Name="image1" Stretch="Fill" VerticalAlignment="Stretch" Source="/DealMedia;component/bin/trumpet.png" />
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Root Name="检测" IsExpanded="true" Name_EN="Inspection"> 
+
+  <Title Name="缺陷检测" IsExpanded="true" Name_EN="Defection" NameParent="图像处理" NameParent_EN="Inspection">
+    <Function Name="获取背光角点" Name_EN="PointBLight" NameParent="缺陷检测" NameParent_EN="Defection"/>
+    <Function Name="表面缺陷检测(亮暗点团)" Name_EN="LightDark" NameParent="缺陷检测" NameParent_EN="Defection"/>
+    <Function Name="BurCheck" Name_EN="BurCheck" NameParent="缺陷检测" NameParent_EN="Defection"/>
+  </Title>
+</Root>
+
+<!--<Title Name="缺陷检测" IsExpanded="true">
+    <Function Name="焊锡"/>
+    <Function Name="间隙"/>
+    <Function Name="边缘"/>
+    <Function Name="边缘凸起"/>
+    <Function Name="边缘崩缺"/>
+    <Function Name="粒子检测"/>
+    <Function Name="表面缺陷检测(PN)"/>
+  </Title>-->
+
+<!--<Title Name="图像处理结果存储" IsExpanded="true">
+  <Function Name="图像处理结果存储"/>
+</Title>-->

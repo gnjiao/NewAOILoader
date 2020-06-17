@@ -1,0 +1,93 @@
+﻿<DealImageProcess:BaseUCImageProcess x:Class="DealImageProcess_EX.UCLinesDotsPosNegInspect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:DealImageProcess="clr-namespace:DealImageProcess;assembly=DealImageProcess"  
+             xmlns:DealImageProcess_EX="clr-namespace:DealImageProcess_EX" 
+             xmlns:BasicClass="clr-namespace:BasicClass;assembly=BasicClass" 
+             xmlns:ControlLib="clr-namespace:ControlLib;assembly=ControlLib"   
+             xmlns:BasicComprehensive="clr-namespace:BasicComprehensive;assembly=BasicComprehensive"
+             xmlns:DealDisplay="clr-namespace:DealDisplay;assembly=DealDisplay"
+            xmlns:DealResult="clr-namespace:DealResult;assembly=DealResult"
+            xmlns:DealResultEX="clr-namespace:DealResult_EX;assembly=DealResult_EX"
+            xmlns:DealInOutput="clr-namespace:DealInOutput;assembly=DealInOutput"
+            mc:Ignorable="d" 
+            d:DesignHeight="350" d:DesignWidth="610" xmlns:my="clr-namespace:DealCalibrate;assembly=DealCalibrate">
+    <UserControl.Resources >
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="7*" />
+        </Grid.RowDefinitions>
+        <ControlLib:NGroupBox Grid.Row="0" TitleBrush="#FF00D1E5" Foreground="Black" HorizontalAlignment="Stretch" Header="基本参数">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="点状缺陷灰度阈值:" Height="25" Margin="0" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="1" Margin="0" Minimum="0" Name="dudDotsTh" Value="50" Grid.Column="1" Maximum="255" ValueChanged="dudDotsTh_ValueChanged" />
+                <Label Content="线状缺陷灰度阈值:" Height="25" Margin="0" Grid.Row="0" Grid.Column="2"/>
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="1" Margin="0" Minimum="0" Name="dudLinesTh" Value="35" Grid.Row="0" Grid.Column="3" Maximum="255" ValueChanged="dudLinesTh_ValueChanged" />
+            </Grid>
+        </ControlLib:NGroupBox>
+        <ControlLib:NGroupBox Grid.Row="1" TitleBrush="#FF00D1E5" Foreground="Black" HorizontalAlignment="Stretch" Header="高级参数">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*" />
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="100*" />
+                    <ColumnDefinition Width="150*" />
+                    <ColumnDefinition Width="150*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="填充细小凹陷:" Height="25" Margin="0" Grid.Row="0" Grid.Column="0"/>
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="1" Margin="25,2" Minimum="0" Name="dudClosingRadius" Value="1" Grid.Column="1" Maximum="20" ValueChanged="dudClosingRadius_ValueChanged" Grid.ColumnSpan="2" />
+                <Label Content="剔除细小凸起:" Height="25" Margin="0" Grid.Column="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="1" Margin="0" Minimum="0" Name="dudOpeningRadius" Value="1" Grid.Column="4" Maximum="20" ValueChanged="dudOpeningRadius_ValueChanged" />
+
+                <Label Content="尺寸筛选值:" Height="25" Margin="0" Grid.Row="1" Grid.Column="0"/>
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="1" Margin="25,2" Minimum="0" Name="dudSizeTh" Value="5" Grid.Row="1" Grid.Column="1" Maximum="100" ValueChanged="dudSizeTh_ValueChanged" Grid.ColumnSpan="2" />
+                <Label Content="点线缺陷分离阈值:" Height="25" Margin="0" Grid.Row="1" Grid.Column="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Height="35"  Width="100" Increment="0.1" Margin="0" Minimum="1" Name="dudDotsLinesSeperateTh" Value="3" Grid.Row="1" Grid.Column="4" Maximum="100" ValueChanged="dudDotsLinesSeperateTh_ValueChanged" />
+
+                <Label Content="正反判定搜索区域上扩:" Height="25" Margin="0" Grid.Row="2" Grid.Column="0" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Row="2" Grid.Column="1" Height="35" Increment="0.1" Margin="25,2" Maximum="20" Minimum="0" Name="dudUpExtend" Value="4" Width="100" ValueChanged="dudUpExtend_ValueChanged" Grid.ColumnSpan="2" />
+                <Label Content="正反判定搜索区域左扩:" Height="25" Margin="0" Grid.Row="2" Grid.Column="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Row="2" Grid.Column="4" Height="35" Increment="0.1" Margin="0" Maximum="20" Minimum="0" Name="dudLeftExtend" Value="0.5" Width="100" ValueChanged="dudLeftExtend_ValueChanged" />
+
+                <Label Content="正反判定搜索区域下扩:" Height="25" Margin="0" Grid.Row="3" Grid.Column="0" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Row="3" Grid.Column="1" Height="35" Increment="0.1" Margin="25,2" Maximum="20" Minimum="0" Name="dudDownExtend" Value="5" Width="100" ValueChanged="dudDownExtend_ValueChanged" Grid.ColumnSpan="2" />
+                <Label Content="正反判定搜索区域右扩:" Height="25" Margin="0" Grid.Row="3" Grid.Column="3" />
+                <ControlLib:DoubleUpDown BorderBrush="#FF4BAEEF" Grid.Row="3" Grid.Column="4" Height="35" Increment="0.1" Margin="0" Maximum="20" Minimum="0" Name="dudRightExtend" Value="5" Width="100" ValueChanged="dudRightExtend_ValueChanged" />
+                <my:UCUseCalib Height="35" HorizontalAlignment="Stretch" Margin="0,2" Name="uCUseCalib" VerticalAlignment="Center" Visibility="{Binding Path=VisibleRecord, ElementName=uCMStraightLine, Mode=TwoWay}" Grid.ColumnSpan="3" Grid.Row="5" />
+                <DealImageProcess:UCSetRecord Height="38" HorizontalAlignment="Center" Margin="0" x:Name="uCSetRecord" VerticalAlignment="Center" Width="142" Grid.Column="4" Grid.Row="5" />
+                <Label Content="相机序号:" Height="25" Margin="0" Grid.Row="4" />
+                <ComboBox BorderBrush="#FF00D1E5" Height="35" HorizontalAlignment="Center" Margin="0,2" Name="cboChangeCamera" VerticalAlignment="Center" Width="150" Grid.Column="1" Grid.Row="4" SelectionChanged="cboChangeCamera_SelectionChanged" Grid.ColumnSpan="2" />
+                <ComboBox BorderBrush="#FF00D1E5" Grid.ColumnSpan="2" Height="35" HorizontalAlignment="Right" Margin="0,2" Name="cboCellData" VerticalAlignment="Center" Width="215" Grid.Column="3" Grid.Row="4" SelectionChanged="cboCellData_SelectionChanged" />
+                <Label Content="引用单元:" Height="25" Margin="0" Grid.Column="3" Grid.Row="4" />
+            </Grid>
+        </ControlLib:NGroupBox>
+    </Grid>
+</DealImageProcess:BaseUCImageProcess>
