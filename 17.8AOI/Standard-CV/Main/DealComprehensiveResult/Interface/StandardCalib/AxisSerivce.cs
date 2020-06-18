@@ -27,12 +27,12 @@ namespace Main
 
         private AxisSerivce()
         {
-
+            Load();
         }
         #endregion
 
         #region properties
-        const string Path = @"D:\Store\Custom\Axis\axis.xml";
+        const string Path = @"D:\Store\Custom\Axis\axisNew.btn";
         #endregion
 
         ObservableCollection<AxisModel> _axisParam = null;
@@ -41,7 +41,11 @@ namespace Main
         {
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
-            if (axis == null) _axisParam.Add(new AxisModel { UniqueId = axisId });
+            if (axis == null)
+            {
+                axis = new AxisModel { UniqueId = axisId };
+                _axisParam.Add(axis);
+            }
 
             axis.A1 = a1;
             Save();
@@ -51,7 +55,11 @@ namespace Main
         {
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
-            if (axis == null) _axisParam.Add(new AxisModel { UniqueId = axisId });
+            if (axis == null)
+            {
+                axis = new AxisModel { UniqueId = axisId };
+                _axisParam.Add(axis);
+            }
 
             axis.B1 = b1;
             Save();
@@ -62,7 +70,11 @@ namespace Main
         {
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
-            if (axis == null) _axisParam.Add(new AxisModel { UniqueId = axisId });
+            if (axis == null)
+            {
+                axis = new AxisModel { UniqueId = axisId };
+                _axisParam.Add(axis);
+            }
 
             axis.A2 = a2;
             Save();
@@ -72,7 +84,11 @@ namespace Main
         {
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
-            if (axis == null) _axisParam.Add(new AxisModel { UniqueId = axisId });
+            if (axis == null)
+            {
+                axis = new AxisModel { UniqueId = axisId };
+                _axisParam.Add(axis);
+            }
 
             axis.B2 = b2;
             Save();
@@ -82,7 +98,11 @@ namespace Main
         {
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
-            if (axis == null) _axisParam.Add(new AxisModel { UniqueId = axisId });
+            if (axis == null)
+            {
+                axis = new AxisModel { UniqueId = axisId };
+                _axisParam.Add(axis);
+            }
 
             axis.AMP = amp;
             Save();
@@ -90,7 +110,7 @@ namespace Main
 
         public double[] GetXYValues(int axisId, double[] offset)
         {
-            if (offset.Length != 2) return new double[2];
+            if (offset.Length < 2) return new double[2];
             var axis = _axisParam
                 .Where(p => p.UniqueId == axisId).ToArray().FirstOrDefault();
             if (axis == null) return new double[2];

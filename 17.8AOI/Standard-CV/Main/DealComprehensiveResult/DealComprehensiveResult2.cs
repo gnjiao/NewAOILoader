@@ -233,7 +233,7 @@ namespace Main
                    
                 }
 
-                //Camera1Done = true;
+                Camera1Done = true;
                 AxisCalib(index);
                 return StateComprehensive_enum.True;
             }

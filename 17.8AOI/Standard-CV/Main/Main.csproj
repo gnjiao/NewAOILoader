@@ -389,8 +389,12 @@
     <Compile Include="ParProduct\MainParProduct.cs" />
     <Compile Include="RobotGuide\RadioButtonCheckConverter.cs" />
     <Compile Include="RobotGuide\RobotGuideViewModel.cs" />
+    <Compile Include="RobotGuide\ToggleButtonContentConverter.cs" />
     <Compile Include="RobotGuide\WndRobotGuide.xaml.cs">
       <DependentUpon>WndRobotGuide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RobotGuide\WndStationCalib.xaml.cs">
+      <DependentUpon>WndStationCalib.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartWindow\Program.cs" />
     <Compile Include="StartWindow\StartWindow.xaml.cs">
@@ -411,6 +415,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RobotGuide\WndRobotGuide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RobotGuide\WndStationCalib.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

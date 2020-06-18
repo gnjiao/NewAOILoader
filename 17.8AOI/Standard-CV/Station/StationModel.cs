@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Station
 {
     [Serializable]
-    public class StationModel:ICloneable
+    public class StationModel : ICloneable
     {
         private bool _isCalibed = false;
         /// <summary>
@@ -106,7 +106,7 @@ namespace Station
         /// </summary>
         public double CalibX
         {
-            get=> _calibX;
+            get => _calibX;
             set
             {
                 _calibX = value;

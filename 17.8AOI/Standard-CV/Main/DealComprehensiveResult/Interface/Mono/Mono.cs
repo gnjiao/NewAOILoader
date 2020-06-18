@@ -353,14 +353,26 @@ namespace Main
                         //如果算出来是-0.5，那系数是1，直接发给轴做补偿就可以了
                         deltaR = r / Protocols.AxisT_CalibRC > 0 ? -1 : 1;
 
-                        AxisSerivce.GetInstance().SetAMP(0, deltaR);
-
                         value = new double[4] { 0, 0, 0, deltaR };
+
+                        r = Protocols.AxisT_CalibRC;
+                        double dy1 = Pt2Mark2CalibStd.DblValue2 - Pt2Mark1CalibStd.DblValue2;
+                        double dy2 = Pt2Mark2Calib.DblValue2 - Pt2Mark1Calib.DblValue2;
+                        double a = dy1 / Protocols.ConfDisMark;
+                        double b = dy2 / Protocols.ConfDisMark;
+                        double m = Math.PI / 180;
+
+                        deltaR = 2 / Math.Sqrt(
+                            Math.Pow((a + b) / Math.Cos(r * m / 2), 2)
+                            + Math.Pow((a - b) / Math.Sin(r * m / 2), 2));
+                        //double r1 = Math.Asin(dy1 * deltaR / Protocols.ConfDisMark) * 180 / Math.PI;
+                        //double r2 = Math.Asin(dy2 * deltaR / Protocols.ConfDisMark) * 180 / Math.PI;
+                        AxisSerivce.GetInstance().SetAMP(0, deltaR);
                         break;
                 }
 
-                AxisDirectionService.GetInstance().SetCo(type, value);
-                AxisDirectionService.GetInstance().Save();
+                //AxisDirectionService.GetInstance().SetCo(type, value);
+                //AxisDirectionService.GetInstance().Save();
                 LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_AxisCalibOK);
             }
         }

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -59,7 +60,7 @@ namespace Station
         /// <summary>
         /// 设置基准值，即示教的位置
         /// </summary>
-        /// <param name="stationId">工位号</param>
+        /// <param name="stationId">工位号,不是数组，推荐从1开始</param>
         /// <param name="value">基准值，数组长度必须是4，包含xyzr</param>
         /// <param name="path">保存文件的路径</param>
         /// <param name="ifCreate">如果原先并没有输入工位号对应的数据，是否直接创建新的数据</param>
@@ -116,6 +117,28 @@ namespace Station
         }
 
         /// <summary>
+        /// 修正示教数据，在标定时根据标定mark与视野中心的距离进行反补
+        /// </summary>
+        /// <param name="stationId">工位号，推荐从1开始</param>
+        /// <param name="value">反补偏差</param>
+        /// <param name="path">保存数据的路径</param>
+        public void ModifyStd(int stationId, double[] value, string path)
+        {
+            //如果输入数组长度小于3则返回
+            if (value.Length < 2) return;
+            //在数据集合中搜索对应的工位数据
+            var data = _datas.Where(p => p.Index == stationId).ToArray().FirstOrDefault();
+            //如果指定工位号的数据不存在或者该工位尚未示教，直接返回
+            if (data == null || !data.IsTeached) return;
+            //赋值
+            data.StdX += value[0];
+            data.StdY += value[1];
+            data.StdZ += value[2];
+            //保存更新后的数据
+            Save(path);
+        }
+
+        /// <summary>
         /// 重新加载指定路径下的工位数据，用于切换配方时调用
         /// <para>一旦调用这个函数，新路径下的数据会被刷新成无效数据，即没有示教标定过</para>
         /// </summary>
@@ -167,7 +190,8 @@ namespace Station
 
             try
             {
-                XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                //XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                BinaryFormatter _formatter = new BinaryFormatter();
                 //创建流
                 using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
@@ -190,7 +214,8 @@ namespace Station
             {
                 try
                 {
-                    XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                    //XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                    BinaryFormatter _formatter = new BinaryFormatter();
                     using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         return (T)_formatter.Deserialize(fs);

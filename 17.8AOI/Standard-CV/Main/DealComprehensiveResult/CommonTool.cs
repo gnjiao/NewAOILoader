@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -18,7 +19,8 @@ namespace Main
 
             try
             {
-                XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                //XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                BinaryFormatter _formatter = new BinaryFormatter();
                 //创建流
                 using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
@@ -35,7 +37,8 @@ namespace Main
             {
                 try
                 {
-                    XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                    //XmlSerializer _formatter = new XmlSerializer(typeof(T));
+                    BinaryFormatter _formatter = new BinaryFormatter();
                     using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         return (T)_formatter.Deserialize(fs);
