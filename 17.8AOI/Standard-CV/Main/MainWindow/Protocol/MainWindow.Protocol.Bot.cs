@@ -25,6 +25,9 @@ namespace Main
         public static string BotCmd_Teach => "25";
         public static string BotCmd_TeachOver => "26";
         public static string BotCmd_AxisCalibOK => "27";
+
+        public static string BotCmd_AskBuildVacuum => "90";
+        public static string BotCmd_AskBreakVacuum => "91";
         #endregion
 
         #region adj

@@ -21,10 +21,13 @@ namespace Main
         public RobotGuideViewModel()
         {
             MoveCommand = new RelayCommand<string>(Move, IsValidate);
-            CalibCommand = new RelayCommand<string>(Calib);
+            CalibCommand = new RelayCommand(Calib);
             CalibRCComand = new RelayCommand(CalibRC);
             TeachCommand = new RelayCommand(Teach);
             SaveCurrentPosCommand = new RelayCommand(Save);
+            SetStepCommand = new RelayCommand<string>(SetStep);
+            AskBuildVacuumCommand = new RelayCommand(AskBuildVacuum);
+            AskBreakVacuumCommand = new RelayCommand(AskBreakVacuum);
 
             Messenger.Default.Register<string[]>(this, "CurrentPos", UpdateCurrentPos);
         }
@@ -75,6 +78,13 @@ namespace Main
             set => Set(ref _incrementZ, value);
         }
 
+        private bool _ifCalibRC = false;
+        public bool IfCalibRC
+        {
+            get => _ifCalibRC;
+            set => Set(ref _ifCalibRC, value);
+        }
+
         int _stationNum = 1;
         public int StationNum
         {
@@ -95,8 +105,12 @@ namespace Main
         public ICommand CalibCommand { get; set; }
         public ICommand CalibRCComand { get; set; }
         public ICommand TeachCommand { get; set; }
-        public ICommand SaveXYCommand { get; set; }
         public ICommand SaveCurrentPosCommand { get; set; }
+
+        public ICommand SetStepCommand { get; set; }
+
+        public ICommand AskBuildVacuumCommand { get; set; }
+        public ICommand AskBreakVacuumCommand { get; set; }
         #endregion
 
         #region func
@@ -134,7 +148,7 @@ namespace Main
             MoveButtonsEnabled = false;
         }
 
-        void Calib(string i)
+        void Calib()
         {
             if (MessageBox.Show("是否确定开始标定工位：" + StationNum,
                 "确认信息", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
@@ -144,7 +158,10 @@ namespace Main
                 "确认信息", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
                 return;
 
-            LogicRobot.L_I.WriteRobotCMD(new Point4D(Convert.ToInt32(i), 0, 0, 0), Protocols.BotCmd_CalibStation);
+            if (IfCalibRC)
+                LogicRobot.L_I.WriteRobotCMD(new Point4D(StationNum, 0, 0, 0), Protocols.BotCmd_CalibRC);
+            else
+                LogicRobot.L_I.WriteRobotCMD(new Point4D(Convert.ToInt32(StationNum), 0, 0, 0), Protocols.BotCmd_CalibStation);
         }
 
         void CalibRC()
@@ -212,6 +229,21 @@ namespace Main
             {
                 Log.L_I.WriteError("RobotGuide", ex);
             }
+        }
+
+        void SetStep(string step)
+        {
+            IncrementX = IncrementY = IncrementZ = Convert.ToDouble(step);
+        }
+
+        void AskBuildVacuum()
+        {
+            LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_AskBuildVacuum);
+        }
+
+        void AskBreakVacuum()
+        {
+            LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_AskBreakVacuum);
         }
         #endregion
     }

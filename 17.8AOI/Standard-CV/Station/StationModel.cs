@@ -1,13 +1,16 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Station
 {
     [Serializable]
-    public class StationModel : ICloneable
+    public class StationModel :ViewModelBase, ICloneable
     {
         private bool _isCalibed = false;
         /// <summary>
@@ -16,10 +19,7 @@ namespace Station
         public bool IsCalibed
         {
             get => _isCalibed;
-            set
-            {
-                _isCalibed = value;
-            }
+            set => Set(ref _isCalibed, value);
         }
 
         private bool _isTeached = false;
@@ -29,10 +29,7 @@ namespace Station
         public bool IsTeached
         {
             get => _isTeached;
-            set
-            {
-                _isTeached = value;
-            }
+            set => Set(ref _isTeached, value);
         }
 
         private int _index = 0;
@@ -42,10 +39,7 @@ namespace Station
         public int Index
         {
             get => _index;
-            set
-            {
-                _index = value;
-            }
+            set => Set(ref _index, value);
         }
 
         private double _stdX = 0;
@@ -55,10 +49,7 @@ namespace Station
         public double StdX
         {
             get => _stdX;
-            set
-            {
-                _stdX = value;
-            }
+            set => Set(ref _stdX, value);
         }
 
         private double _stdY = 0;
@@ -68,10 +59,7 @@ namespace Station
         public double StdY
         {
             get => _stdY;
-            set
-            {
-                _stdY = value;
-            }
+            set => Set(ref _stdY, value);
         }
 
         private double _stdZ = 0;
@@ -81,10 +69,7 @@ namespace Station
         public double StdZ
         {
             get => _stdZ;
-            set
-            {
-                _stdZ = value;
-            }
+            set => Set(ref _stdZ, value);
         }
 
         private double _stdR = 0;
@@ -94,10 +79,7 @@ namespace Station
         public double StdR
         {
             get => _stdR;
-            set
-            {
-                _stdR = value;
-            }
+            set => Set(ref _stdR, value);
         }
 
         private double _calibX = 0;
@@ -107,10 +89,7 @@ namespace Station
         public double CalibX
         {
             get => _calibX;
-            set
-            {
-                _calibX = value;
-            }
+            set => Set(ref _calibX, value);
         }
 
         private double _calibY = 0;
@@ -120,10 +99,7 @@ namespace Station
         public double CalibY
         {
             get => _calibY;
-            set
-            {
-                _calibY = value;
-            }
+            set => Set(ref _calibY, value);
         }
 
         private double _calibR = 0;
@@ -133,10 +109,7 @@ namespace Station
         public double CalibR
         {
             get => _calibR;
-            set
-            {
-                _calibR = value;
-            }
+            set => Set(ref _calibR, value);
         }
 
         public object Clone()

@@ -95,6 +95,9 @@
         <local:CheckConverter x:Key="CheckConverter"/>
         <local:ToggleButtonContentConverter x:Key="ToggleButtonContentConverter"/>
     </Window.Resources>
+    <Window.DataContext>
+        <local:RobotGuideViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -272,12 +275,14 @@
                 <Button Content="开始示教"
                         FontSize="16"
                         Width="100"
-                        Height="32"/>
+                        Height="32"
+                        Command="{Binding TeachCommand}"/>
                 <Button Content="保存当前位置"
                         Grid.Row="1"
                         FontSize="16"
                         Width="100"
-                        Height="32"/>
+                        Height="32"
+                        Command="{Binding SaveCurrentPosCommand}"/>
                 <Button Content="开始标定"
                         Grid.Row="2"
                         FontSize="16"
@@ -286,6 +291,7 @@
                 <ToggleButton Grid.Row="3"
                               Width="100"
                               Height="32"
+                              IsChecked="{Binding IfCalibRC}"
                               Content="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked,
 					Converter={StaticResource ToggleButtonContentConverter},ConverterParameter=不标定旋转中心/标定旋转中心}"/>
             </Grid>
@@ -293,47 +299,56 @@
 
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Content="吸真空"
+        <GroupBox Header="Others"
+                   Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="吸真空"
                         FontSize="16"
                         Width="100"
                         Height="32"/>
-            <Button Content="破真空"
+                <Button Content="破真空"
                         Grid.Row="1"
                         FontSize="16"
                         Width="100"
                         Height="32"/>
-            <Label Content="真空 OFF"
+                <Label Content="真空 OFF"
                    Grid.Row="2"
                    FontSize="16"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
-            <Button Content="长距离"
+                <Button Content="长距离"
                     Grid.Column="1"
                     FontSize="16"
                     Width="100"
-                    Height="32"/>
-            <Button Content="中距离"
+                    Height="32"
+                    Command="{Binding SetStepCommand}"
+                    CommandParameter="10"/>
+                <Button Content="中距离"
                     Grid.Column="1"
                     Grid.Row="1"
                     FontSize="16"
                     Width="100"
-                    Height="32"/>
-            <Button Content="短距离"
+                    Height="32"
+                    Command="{Binding SetStepCommand}"
+                    CommandParameter="1"/>
+                <Button Content="短距离"
                     Grid.Column="1"
                     Grid.Row="2"
                     FontSize="16"
                     Width="100"
-                    Height="32"/>
-        </Grid>
+                    Height="32"
+                    Command="{Binding SetStepCommand}"
+                    CommandParameter="0.2"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

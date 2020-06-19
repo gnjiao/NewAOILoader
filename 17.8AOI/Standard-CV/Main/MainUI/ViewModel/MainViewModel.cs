@@ -21,7 +21,7 @@ namespace Main
         {
             RobotStdCommand = new RelayCommand(OpenRobotStdView);
             RobotAdjCommand = new RelayCommand(OpenRobotAdjView);
-            RobotGuideCommand = new RelayCommand(() => new WndRobotGuide().Show());
+            RobotGuideCommand = new RelayCommand(() => new WndStationCalib().Show());
         }
 
         void OpenRobotStdView()
