@@ -184,6 +184,8 @@
 
                 <MenuItem x:Name="cmiOther" Header="其他" FontSize="14" Width="50" >
                     <MenuItem Header="机器人引导" x:Name="cmiCim" Command="{Binding RobotGuideCommand}"/>
+                    <MenuItem Header="读码模式" Command="{Binding CodeModeSettingCommand}"/>
+                    <MenuItem Header="读码参数" Command="{Binding CodeSettingCommand}"/>
                     <Separator Background="White" />
                     <!--<MenuItem Header="计算器" x:Name="cmiCal" Click="cmiCal_Click" />-->
                     <!--<MenuItem Header="记事本" x:Name="cmiText" Click="cmiText_Click" />

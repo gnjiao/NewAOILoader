@@ -29,7 +29,7 @@ namespace Main
                 if (ParStateSoft.StateMachine_e == StateMachine_enum.NullRun)
                 {
                     ShowState("空跑，默认发送插栏数据0");
-                    LogicPLC.L_I.WriteRegData3((int)DataRegister3.InsertData, 145.5);
+                    LogicPLC.L_I.WriteRegData3((int)DataRegister3.InsertData, -294);
                     LogicPLC.L_I.WriteRegData1((int)DataRegister1.InsertDataConfirm, 1);
                     return;
                 }

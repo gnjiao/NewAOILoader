@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,9 +57,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializer\BinaryFormatterAdaptor.cs" />
+    <Compile Include="Serializer\IFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="Serializer\Serializer_Binary.cs" />
+    <Compile Include="Serializer\Serializer_Xml.cs" />
     <Compile Include="StationModel.cs" />
     <Compile Include="StationService.cs" />
+    <Compile Include="Serializer\XmlFormatterAdaptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,12 +1,9 @@
 ﻿using BasicClass;
-using Camera;
-using Common;
 using DealCalibrate;
 using DealConfigFile;
 using DealPLC;
 using DealRobot;
 using ParComprehensive;
-using StationDataManager;
 using System;
 
 
@@ -37,19 +34,23 @@ namespace Main
                 ParCalibRotate parCalibRotate = (ParCalibRotate)baseParComprehensive;
                 int num = Protocols.BotAdjIndex + index - 1;
 
+                var data = Station.StationService.GetInstance().GetData(index);
+                //判断数据的有效性，如果该工位没有进行过有效标定，则默认抛料
+                if (!data.IsCalibed)
+                {
+                    ShowAlarm("工位" + index + "尚未标定，请先标定");
+                    LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_PreciseNG);
+                    return;
+                }
                 //改用新的轴标定计算
                 double angle = Math.Asin(
                     (Pt2Mark2.DblValue2
                     - Pt2Mark1.DblValue2)
                     * AxisSerivce.GetInstance().GetAMP(0)
-                    / Protocols.ConfDisMark) * 180 / Math.PI
-                    - StationDataMngr.CalibPos_L[index - 1].DblValue4;
-                //double angle2 = Math.Asin(
-                //    (Pt2Mark2.DblValue2
-                //    - Pt2Mark1.DblValue2)
-                //    * AxisSerivce.GetInstance().GetAMP(0)
-                //    / Protocols.ConfDisMark) * 180 / Math.PI
-                //    - StationDataMngr.CalibPos_L[index - 1].DblValue4;
+                    / Protocols.ConfDisMark) * 180 / Math.PI;
+                
+                angle -= data.CalibR;
+                
                 ShowState("工位" + index + "角度偏差: " + angle);
                 LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_PlaceToAOI1 + index - 1,
                     Protocols.AxisT_PlaceToAOI[index - 1] - angle + ParAdjust.Value3("adj" + num));
@@ -58,8 +59,10 @@ namespace Main
                 Point2D MarkAfterRotate = fcr.GetPoint_AfterRotation(
                     -angle / 180 * Math.PI, parCalibRotate.PointRC, Pt2Mark1);
 
-                double deltaX = MarkAfterRotate.DblValue1 - StationDataMngr.CalibPos_L[index - 1].DblValue1;
-                double deltaY = MarkAfterRotate.DblValue2 - StationDataMngr.CalibPos_L[index - 1].DblValue2;
+                //double deltaX = MarkAfterRotate.DblValue1 - StationDataMngr.CalibPos_L[index - 1].DblValue1;
+                //double deltaY = MarkAfterRotate.DblValue2 - StationDataMngr.CalibPos_L[index - 1].DblValue2;
+                double deltaX = MarkAfterRotate.DblValue1 - data.CalibX;
+                double deltaY = MarkAfterRotate.DblValue2 - data.CalibY;
 
                 #region axis calc
                 double[] arr = new double[4] { deltaX, deltaY, 0, 0 };
@@ -76,19 +79,27 @@ namespace Main
                 //    Protocols.ConfPlaceAngle, Protocols.ConfPreciseAngle);
                 Point2D delta = TransDelta(new Point2D(refer[0], refer[1]),
                     Protocols.ConfPlaceAngle, Protocols.ConfPreciseAngle);
-                ShowState("当前使用轴计算得到的偏差");
+                ShowState("当前使用轴计算得到的偏差,拍照与放片角度差：" + (Protocols.ConfPlaceAngle - Protocols.ConfPreciseAngle));
                 ShowState(string.Format("工位{0}X方向补偿{1},Y方向补偿{2}", index,
                     delta.DblValue1.ToString(ReserveDigits),
                     delta.DblValue2.ToString(ReserveDigits)));
 
 
+                //Point4D pos = new Point4D
+                //{
+                //    DblValue1 = delta.DblValue1 + StationDataMngr.PlacePos_L[index - 1].DblValue1
+                //    + ParAdjust.Value1("adj" + num),
+                //    DblValue2 = delta.DblValue2 + StationDataMngr.PlacePos_L[index - 1].DblValue2
+                //    + ParAdjust.Value2("adj" + num),
+                //    DblValue3 = StationDataMngr.PlacePos_L[index - 1].DblValue3,
+                //    DblValue4 = Protocols.RobotAxisU_PlaceToAOI[index - 1]
+                //};
+
                 Point4D pos = new Point4D
                 {
-                    DblValue1 = delta.DblValue1 + StationDataMngr.PlacePos_L[index - 1].DblValue1
-                    + ParAdjust.Value1("adj" + num),
-                    DblValue2 = delta.DblValue2 + StationDataMngr.PlacePos_L[index - 1].DblValue2
-                    + ParAdjust.Value2("adj" + num),
-                    DblValue3 = StationDataMngr.PlacePos_L[index - 1].DblValue3,
+                    DblValue1 = delta.DblValue1 + data.StdX + ParAdjust.Value1("adj" + num),
+                    DblValue2 = delta.DblValue2 + data.StdY + ParAdjust.Value2("adj" + num),
+                    DblValue3 = data.StdZ,
                     DblValue4 = Protocols.RobotAxisU_PlaceToAOI[index - 1]
                 };
 
@@ -107,41 +118,43 @@ namespace Main
                     / Protocols.ConfDisMark) * 180 / Math.PI;
                 ShowState("精定位验证工位" + index + "逆时针角度偏差: " + angle);
 
-                StationDataMngr.CalibPos_L[index - 1].DblValue1 = Pt2Mark1.DblValue1;
-                StationDataMngr.CalibPos_L[index - 1].DblValue2 = Pt2Mark1.DblValue2;
-                StationDataMngr.CalibPos_L[index - 1].DblValue4 = angle;
-                StationDataMngr.WriteIniCalibPos(index);
+                //StationDataMngr.CalibPos_L[index - 1].DblValue1 = Pt2Mark1.DblValue1;
+                //StationDataMngr.CalibPos_L[index - 1].DblValue2 = Pt2Mark1.DblValue2;
+                //StationDataMngr.CalibPos_L[index - 1].DblValue4 = angle;
+                //StationDataMngr.WriteIniCalibPos(index);
 
-                StationDataMngr.WriteIniCalibPosLocal(index);
+                //StationDataMngr.WriteIniCalibPosLocal(index);
 
                 LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_CalibOK);
 
                 #region new station
                 double[] value = new double[3] { Pt2Mark1.DblValue1, Pt2Mark1.DblValue2, angle };
-                Station.StationService.GetInstance().SetCalib(0, value, Protocols.StationDataPath);
+                Station.StationService.GetInstance().SetCalib(index, value, Protocols.StationDataPath);
 
-                //用旋转中心
-                BaseParCalibrate baseParComprehensive = ParComprehensive2.P_I.GetCellParCalibrate(Camera2RC);
-                ParCalibRotate parCalibRotate = (ParCalibRotate)baseParComprehensive;
+                //这里套娃了，修正位置之后意味着原来的标定数据无效了
+                //所以修正完之后要重新标定，并且重新标定的时候不可以再做修正
+                ////用旋转中心
+                //BaseParCalibrate baseParComprehensive = ParComprehensive2.P_I.GetCellParCalibrate(Camera2RC);
+                //ParCalibRotate parCalibRotate = (ParCalibRotate)baseParComprehensive;
 
-                //改用新的轴标定计算
-                FunCalibRotate fcr = new FunCalibRotate();
-                Point2D MarkAfterRotate = fcr.GetPoint_AfterRotation(
-                    -angle / 180 * Math.PI, parCalibRotate.PointRC, Pt2Mark1);
-                //与相机中心做偏差
-                double dx = MarkAfterRotate.DblValue1 - 640;
-                double dy = MarkAfterRotate.DblValue2 - 480;
-                //此处因为反补标定位置，所以偏差取反
-                double[] arr = new double[2] { -dx, -dy };
-                double[] refer = AxisSerivce.GetInstance().GetXYValues(0, arr);
-                Point2D delta = TransDelta(new Point2D(refer[0], refer[1]),
-                    Protocols.ConfPlaceAngle, Protocols.ConfPreciseAngle);
-                //求出的反向补正用于校正原来的基准值
-                Station.StationService.GetInstance().ModifyStd(
-                    index,
-                    new double[3] { delta.DblValue1, delta.DblValue2, 0 },
-                    Protocols.StationDataPath);
-                //4工位全部矫正完之后需要传配方
+                ////改用新的轴标定计算
+                //FunCalibRotate fcr = new FunCalibRotate();
+                //Point2D MarkAfterRotate = fcr.GetPoint_AfterRotation(
+                //    -angle / 180 * Math.PI, parCalibRotate.PointRC, Pt2Mark1);
+                ////与相机中心做偏差
+                //double dx = MarkAfterRotate.DblValue1 - 640;
+                //double dy = MarkAfterRotate.DblValue2 - 480;
+                ////此处因为反补标定位置，所以偏差取反
+                //double[] arr = new double[2] { -dx, -dy };
+                //double[] refer = AxisSerivce.GetInstance().GetXYValues(0, arr);
+                //Point2D delta = TransDelta(new Point2D(refer[0], refer[1]),
+                //    Protocols.ConfPlaceAngle, Protocols.ConfPreciseAngle);
+                ////求出的反向补正用于校正原来的基准值
+                //Station.StationService.GetInstance().ModifyStd(
+                //    index,
+                //    new double[3] { delta.DblValue1, delta.DblValue2, 0 },
+                //    Protocols.StationDataPath);
+                ////4工位全部矫正完之后需要传配方
                 #endregion
             }
         }

@@ -38,7 +38,7 @@ namespace Main
         {
             try
             {
-                LogicPLC.L_I.WriteRegData1((int)DataRegister1.CodeResult, 1);
+                TriggerGetCode(true);
             }
             catch (Exception ex)
             {

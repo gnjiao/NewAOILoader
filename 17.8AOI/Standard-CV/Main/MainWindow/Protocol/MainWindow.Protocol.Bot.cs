@@ -96,32 +96,32 @@ namespace Main
 
         public static int ConfPreciseAngle
         {
-            get
-            {
-                int dir = 0;// (int)ParConfigPar.P_I.ParProduct_L[(int)RecipeRegister.DIR_PRECISE].DblValue;
-                int angle = 0;
-                while (dir > 1)
-                {
-                    dir >>= 1;
-                    angle -= 90;
-                }
-                return (angle + 360) % 360;
-            }
+            get => (int)Cell_Origin;
+            //{
+            //    int dir = 0;// (int)ParConfigPar.P_I.ParProduct_L[(int)RecipeRegister.DIR_PRECISE].DblValue;
+            //    int angle = 0;
+            //    while (dir > 1)
+            //    {
+            //        dir >>= 1;
+            //        angle -= 90;
+            //    }
+            //    return (angle + 360) % 360;
+            //}
         }
 
         public static int ConfPlaceAngle
         {
-            get
-            {
-                int dir = (int)ParConfigPar.P_I.ParProduct_L[(int)RecipeRegister.DIR_PLACETOAOI].DblValue;
-                int angle = 0;
-                while (dir > 1)
-                {
-                    dir >>= 1;
-                    angle -= 90;
-                }
-                return (angle + 360) % 360;
-            }
+            get => (int)Cell_AOI;
+            //{
+            //    int dir = (int)ParConfigPar.P_I.ParProduct_L[(int)RecipeRegister.DIR_PLACETOAOI].DblValue;
+            //    int angle = 0;
+            //    while (dir > 1)
+            //    {
+            //        dir >>= 1;
+            //        angle -= 90;
+            //    }
+            //    return (angle + 360) % 360;
+            //}
         }
 
         public static double GlassXInPresize

@@ -1,4 +1,5 @@
 ﻿using BasicDisplay;
+using DealCIM;
 using DealConfigFile;
 using DealLog;
 using GalaSoft.MvvmLight.Command;
@@ -16,12 +17,16 @@ namespace Main
         public ICommand RobotStdCommand { get; set; }
         public ICommand RobotAdjCommand { get; set; }
         public ICommand RobotGuideCommand { get; set; }
+        public ICommand CodeSettingCommand { get; set; }
+        public ICommand CodeModeSettingCommand { get; set; }
 
         public MainViewModel()
         {
             RobotStdCommand = new RelayCommand(OpenRobotStdView);
             RobotAdjCommand = new RelayCommand(OpenRobotAdjView);
-            RobotGuideCommand = new RelayCommand(() => new WndStationCalib().Show());
+            RobotGuideCommand = new RelayCommand(() => WndStationCalib.GetInstance().Show());
+            CodeSettingCommand = new RelayCommand(() => new CIMWnd().Show());
+            CodeModeSettingCommand = new RelayCommand(() => WndCimMode.GetInstance().Show());
         }
 
         void OpenRobotStdView()

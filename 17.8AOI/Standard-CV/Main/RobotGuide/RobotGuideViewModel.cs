@@ -3,7 +3,7 @@ using DealRobot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using StationDataManager;
+using Station;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -150,6 +150,15 @@ namespace Main
 
         void Calib()
         {
+            #region 判断
+            var data = StationService.GetInstance().GetData(StationNum);
+            if(!data.IsTeached)
+            {
+                MessageBox.Show("当前工位尚未示教，请先示教！");
+                return;
+            }
+            #endregion
+
             if (MessageBox.Show("是否确定开始标定工位：" + StationNum,
                 "确认信息", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
                 return;
@@ -160,8 +169,8 @@ namespace Main
 
             if (IfCalibRC)
                 LogicRobot.L_I.WriteRobotCMD(new Point4D(StationNum, 0, 0, 0), Protocols.BotCmd_CalibRC);
-            else
-                LogicRobot.L_I.WriteRobotCMD(new Point4D(Convert.ToInt32(StationNum), 0, 0, 0), Protocols.BotCmd_CalibStation);
+
+            LogicRobot.L_I.WriteRobotCMD(new Point4D(Convert.ToInt32(StationNum), 0, 0, 0), Protocols.BotCmd_CalibStation);
         }
 
         void CalibRC()
@@ -199,12 +208,12 @@ namespace Main
 
         void Save()
         {
-            if (StationDataMngr.PlacePos_L.Count < StationNum)
-                StationDataMngr.PlacePos_L.Add(new Point4D());
-            StationDataMngr.PlacePos_L[StationNum - 1].DblValue1 = CurrentX;
-            StationDataMngr.PlacePos_L[StationNum - 1].DblValue2 = CurrentY;
-            StationDataMngr.PlacePos_L[StationNum - 1].DblValue3 = CurrentZ;
-            StationDataMngr.WriteIniPlacePos(StationNum);
+            //if (StationDataMngr.PlacePos_L.Count < StationNum)
+            //    StationDataMngr.PlacePos_L.Add(new Point4D());
+            //StationDataMngr.PlacePos_L[StationNum - 1].DblValue1 = CurrentX;
+            //StationDataMngr.PlacePos_L[StationNum - 1].DblValue2 = CurrentY;
+            //StationDataMngr.PlacePos_L[StationNum - 1].DblValue3 = CurrentZ;
+            //StationDataMngr.WriteIniPlacePos(StationNum);
 
             #region new station
             double[] value = new double[4] { CurrentX, CurrentY, CurrentZ, 0 };

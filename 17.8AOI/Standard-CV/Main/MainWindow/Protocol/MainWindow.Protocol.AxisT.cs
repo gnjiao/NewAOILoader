@@ -25,7 +25,7 @@ namespace Main
         /// </summary>
         public static double[] RobotAxisU_PlaceToAOI => new double[4]
         {
-            0,0,0,0
+            0,0,0,-45
         };
         /// <summary>
         /// 机器人从aoi去片的u轴角度，同一工位，认为取放角度相同
@@ -52,7 +52,7 @@ namespace Main
         public static double[] AxisT_PlaceToAOI => new double[4]
         {
             //前两个数字计算，放片和取片时，机器人u轴角度差，这是t轴要旋转的第一部分
-            //第二个数字，是aoi角度和来料角度差，因为来料默认0度，
+            //第二个数字，是aoi角度和来料角度差
             RobotAxisU_PlaceToAOI[0] - RobotAxisU_PickFromUp + Cell_AOI - Cell_Origin,
             RobotAxisU_PlaceToAOI[1] - RobotAxisU_PickFromUp + Cell_AOI - Cell_Origin,
             RobotAxisU_PlaceToAOI[2] - RobotAxisU_PickFromUp + Cell_AOI - Cell_Origin,
@@ -75,7 +75,8 @@ namespace Main
         /// <para>因为plc确保上料平台和aoi方向一致，同时要求放下游也与前两个位置一致</para>
         /// <para>所以从aoi取出的片是0°，且要确保下游角度是0°</para>
         /// </summary>
-        public static double AxisT_PlaceToPlat => RobotAxisU_PlaceToDown - RobotAxisU_PickFromUp + Cell_Down;
+        public static double AxisT_PlaceToDown => 
+            RobotAxisU_PlaceToDown - RobotAxisU_PickFromUp + Cell_Down - Cell_Origin;
         /// <summary>
         /// 旋转中心标定时的t轴角度
         /// </summary>
@@ -83,7 +84,20 @@ namespace Main
         #endregion
 
         #region cell
-        public static double Cell_Origin => 0;
+        public static double Cell_Origin
+        {
+            get
+            {
+                int dir = (int)ParConfigPar.P_I.ParProduct_L[(int)RecipeRegister.DIR_ORIGIN].DblValue;
+                int angle = 0;
+                while (dir > 1)
+                {
+                    dir >>= 1;
+                    angle -= 90;
+                }
+                return GetAngle(angle);
+            }
+        }
         /// <summary>
         /// 产品放aoi的角度，plc在recipe中写1248对应0/90/180/270（顺时针）
         /// <para>本机中这个角度应该常为0</para>
@@ -107,7 +121,7 @@ namespace Main
         /// 产品放下游平台的角度，plc在recipe中写1248对应0/90/180/270
         /// <para>本机中这个角度应该常为0</para>
         /// </summary>
-        public static double Cell_Down => 0;
+        public static double Cell_Down => Cell_Origin;
         #endregion
 
         #region common

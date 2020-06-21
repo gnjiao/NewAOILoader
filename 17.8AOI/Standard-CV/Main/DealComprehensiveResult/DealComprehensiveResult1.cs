@@ -218,12 +218,14 @@ namespace Main
                 //偏差
                 double deltaX = -(480 - pt2MarkArray[(int)PtType_Mono.AutoMark2].DblValue1) * AMP;
                 double deltaY = (640 - pt2MarkArray[(int)PtType_Mono.AutoMark2].DblValue2) * AMP;
-                ShowState("相机1补偿X:" + deltaX.ToString("f3") + ",Y:" + deltaY.ToString("f3"));
+                //plc拍照之后会旋转，然后再放到上游的buffer
+                Point2D d = TransDelta(new Point2D(deltaX, deltaY), Protocols.Cell_Origin, 0);
+                ShowState("相机1补偿X:" + d.DblValue1.ToString("f3") + ",Y:" + d.DblValue2.ToString("f3"));
                 ShowState("相机1角度导致的偏差X:" + delta[0].ToString("f3") + ",Y:" + delta[1].ToString("f3"));
                 WritePLC(1, (int)DataRegister1.OffsetX, 4,
-                    new double[] { delta[0] + deltaX+Protocols.Cam1ComX,
-                        delta[1] + deltaY+Protocols.Cam1ComY,
-                        delta[2]+Protocols.Cam1ComR,
+                    new double[] { delta[0] + d.DblValue1 + Protocols.Cam1ComX,
+                        delta[1] + d.DblValue2 + Protocols.Cam1ComY,
+                        delta[2] + Protocols.Cam1ComR,
                         1 });
 
                 return StateComprehensive_enum.True;

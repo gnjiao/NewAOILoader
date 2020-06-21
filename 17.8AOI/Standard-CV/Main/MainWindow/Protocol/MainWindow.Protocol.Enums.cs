@@ -76,9 +76,13 @@ namespace Main
         /// </summary>
         DIR_PICK,
         /// <summary>
-        /// 放aoi产品方向
+        /// 来料产品方向
         /// </summary>
-        DIR_PLACETOAOI = 20,
+        DIR_ORIGIN = 20,
+        /// <summary>
+        /// AOI放料角度
+        /// </summary>
+        DIR_PLACETOAOI = 25,
         /// <summary>
         /// 卡塞行数
         /// </summary>

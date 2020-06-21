@@ -19,9 +19,31 @@ namespace Main
     /// </summary>
     public partial class WndStationCalib : Window
     {
-        public WndStationCalib()
+        static WndStationCalib _instance = null;
+        static object _locker = new object();
+
+        public static WndStationCalib GetInstance()
+        {
+            if(_instance==null)
+            {
+                lock(_locker)
+                {
+                    if (_instance == null)
+                        _instance = new WndStationCalib();
+                }
+            }
+            return _instance;
+        }
+
+        private WndStationCalib()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }

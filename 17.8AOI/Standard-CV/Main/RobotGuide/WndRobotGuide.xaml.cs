@@ -18,7 +18,7 @@ namespace Main
     /// WndRobotGuide.xaml 的交互逻辑
     /// </summary>
     public partial class WndRobotGuide : Window
-    {
+    {        
         public WndRobotGuide()
         {
             InitializeComponent();

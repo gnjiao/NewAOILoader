@@ -59,7 +59,7 @@ namespace Main
 
                 if (!DealLocation((int)PtType_Mono.AutoMark1, StrMonoMatch1, Pos_enum.Pos1, out htResult))
                 {
-                    FinishPhotoPLC(2);
+                    //FinishPhotoPLC(2);
                     return StateComprehensive_enum.False;
                 }
 
@@ -97,17 +97,18 @@ namespace Main
             {
                 if (ParStateSoft.StateMachine_e == StateMachine_enum.NullRun)
                 {
+                    WritePLC(1, (int)DataRegister1.MonoOffsetX, 4, new double[4] { 0, 0, 0, 1 });
                     return DealResult(1, string.Format("空跑模式，相机{0}第2次拍照默认ok", g_NoCamera));
                 }
 
                 if (!DealLocation((int)PtType_Mono.AutoMark2, StrMonoMatch2, Pos_enum.Pos2, out htResult))
                 {
-                    FinishPhotoPLC(2);
+                    //FinishPhotoPLC(2);
                     return StateComprehensive_enum.False;
                 }
 
                 CalcMonoAngleCom();
-                FinishPhotoPLC(1);
+                //FinishPhotoPLC(1);
                 return StateComprehensive_enum.True;
             }
             catch (Exception ex)
@@ -145,14 +146,13 @@ namespace Main
             {
                 if (ParStateSoft.StateMachine_e == StateMachine_enum.NullRun)
                 {
-                    LogicPLC.L_I.WriteRegData2((int)DataRegister1.MonoOffsetX, 3, new double[] { 0.1, 0.2, 0.3 });
-                    LogicPLC.L_I.WriteRegData2((int)DataRegister1.MonoOffsetConfirm, 1);
+                    WritePLC(1, (int)DataRegister1.MonoOffsetX, 4, new double[4] { 0, 0, 0, 1 });
                     return DealResult(1, string.Format("空跑模式，相机{0}第3次拍照默认ok", g_NoCamera));
                 }
 
                 if (!DealLocation((int)PtType_Mono.AutoMark3, StrMonoMatch2, Pos_enum.Pos2, out htResult))
                 {
-                    FinishPhotoPLC(2);
+                    //FinishPhotoPLC(2);
                     return StateComprehensive_enum.False;
                 }
 

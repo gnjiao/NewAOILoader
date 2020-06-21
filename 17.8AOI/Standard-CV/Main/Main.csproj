@@ -144,6 +144,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\DealCalibrate.dll</HintPath>
     </Reference>
+    <Reference Include="DealCIM">
+      <HintPath>..\DLL\DealCIM.dll</HintPath>
+    </Reference>
     <Reference Include="DealComInterface, Version=1.0.2018.1213, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\DealComInterface.dll</HintPath>
@@ -365,9 +368,11 @@
     <Compile Include="MainWindow\PLC\MainWindow.PLC.Func.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.AxisT.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Bot.cs" />
+    <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Code.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.CST.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Enums.cs" />
+    <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Mode.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Mono.cs" />
     <Compile Include="MainWindow\Protocol\MainWindow.Protocol.Station.cs" />
     <Compile Include="MainWindow\Robot\Robot1\MainWindow.Robot.Reserve.cs" />
@@ -462,10 +467,6 @@
     <ProjectReference Include="..\DealRobot\DealRobot.csproj">
       <Project>{2429126B-59E1-4D64-8A0C-45FD56B5B672}</Project>
       <Name>DealRobot</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StationDataManager\StationDataManager.csproj">
-      <Project>{7E1C1312-9C70-4593-8FA4-C8D83D42F2BA}</Project>
-      <Name>StationDataManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

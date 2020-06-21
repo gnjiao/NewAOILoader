@@ -149,8 +149,8 @@ namespace Main
                 LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_PickFromAOI3, Protocols.AxisT_PickFromAOI[2]);
                 ShowState("发送工位4取片t轴角度:" + Protocols.AxisT_PickFromAOI[3]);
                 LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_PickFromAOI4, Protocols.AxisT_PickFromAOI[3]);
-                ShowState("发送下游放片t轴角度:" + Protocols.AxisT_PlaceToPlat);
-                LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_PlaceToPlat, Protocols.AxisT_PlaceToPlat);
+                ShowState("发送下游放片t轴角度:" + Protocols.AxisT_PlaceToDown);
+                LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_PlaceToPlat, Protocols.AxisT_PlaceToDown);
                 ShowState("发送旋转中心标定t轴角度:" + Protocols.AxisT_CalibRC);
                 LogicPLC.L_I.WriteRegData2((int)DataRegister2.AxisT_CalibRC, Protocols.AxisT_CalibRC);
 

@@ -38,6 +38,8 @@ namespace Station
         private StationService() { }
         #endregion
 
+        protected Serializer _serializer = new Serializer_Xml();
+
         /// <summary>
         /// 当前型号的工位数据集合
         /// </summary>
@@ -54,8 +56,14 @@ namespace Station
         /// </summary>
         /// <param name="stationId"></param>
         /// <returns></returns>
-        public StationModel GetData(int stationId) => _datas
-            .Where(p => p.Index == stationId).ToArray().FirstOrDefault();
+        public StationModel GetData(int stationId)
+        {
+            var data = _datas
+               .Where(p => p.Index == stationId).ToArray().FirstOrDefault();
+            if (data == null)
+                data = new StationModel();
+            return data;
+        }
 
         /// <summary>
         /// 设置基准值，即示教的位置
@@ -86,6 +94,7 @@ namespace Station
             data.StdZ = value[2];
             data.StdR = value[3];
             data.IsTeached = true;
+            data.IsCalibed = false;
             //增加到集合当中
             _datas.Add(data);
             //保存更新后的数据
@@ -162,7 +171,7 @@ namespace Station
         /// <param name="path"></param>
         private void Save(string path)
         {
-            Serialize<ObservableCollection<StationModel>>(_datas, path);
+            _serializer.Serialize<ObservableCollection<StationModel>>(_datas, path);
         }
 
         /// <summary>
@@ -171,59 +180,8 @@ namespace Station
         /// <param name="path"></param>
         public void Load(string path)
         {
-            _datas = DeSerialize<ObservableCollection<StationModel>>(path);
+            _datas = _serializer.DeSerialize<ObservableCollection<StationModel>>(path);
             if (_datas == null) _datas = new ObservableCollection<StationModel>();
-        }
-
-        /// <summary>
-        /// 序列化接口函数
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="data"></param>
-        /// <param name="path"></param>
-        public void Serialize<T>(object data, string path)
-        {
-            //检查目录是否存在
-            string dir = Path.GetDirectoryName(path);
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            try
-            {
-                //XmlSerializer _formatter = new XmlSerializer(typeof(T));
-                BinaryFormatter _formatter = new BinaryFormatter();
-                //创建流
-                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    //序列化写入
-                    _formatter.Serialize(fs, data);
-                }
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// 反序列化接口函数
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public T DeSerialize<T>(string path)
-        {
-            if (File.Exists(path))
-            {
-                try
-                {
-                    //XmlSerializer _formatter = new XmlSerializer(typeof(T));
-                    BinaryFormatter _formatter = new BinaryFormatter();
-                    using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                    {
-                        return (T)_formatter.Deserialize(fs);
-                    }
-                }
-                catch { }
-            }
-            return default;
-        }
+        }        
     }
 }

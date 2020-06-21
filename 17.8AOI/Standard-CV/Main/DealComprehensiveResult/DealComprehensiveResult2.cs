@@ -25,6 +25,7 @@ using BasicDisplay;
 using Main_EX;
 using DealLog;
 using System.Windows;
+using Station;
 
 namespace Main
 {
@@ -59,7 +60,10 @@ namespace Main
                if(ParStateSoft.StateMachine_e == StateMachine_enum.NullRun)
                 {
                     ShowState(string.Format("空跑模式，相机{0}第1次拍照默认ok", g_NoCamera));
-                    LogicRobot.L_I.WriteRobotCMD(new Point4D(-540, -200, -40, 0), Protocols.BotCmd_StationPos);
+                    var data = StationService.GetInstance().GetData(index);
+                    Point4D pt = new Point4D(data.StdX, data.StdY, data.StdZ, 
+                        Protocols.RobotAxisU_PlaceToAOI[index - 1]);
+                    LogicRobot.L_I.WriteRobotCMD(pt, Protocols.BotCmd_StationPos);
                     LogicRobot.L_I.WriteRobotCMD(Protocols.BotCmd_PreciseOK);
                     return StateComprehensive_enum.True;
                 }

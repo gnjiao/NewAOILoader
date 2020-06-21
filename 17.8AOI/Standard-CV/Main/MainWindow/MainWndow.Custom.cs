@@ -17,7 +17,7 @@ namespace Main
             try
             {
                 BaseDealComprehensiveResult_Main.LoadCstData();
-                StationDataManager.StationDataMngr.read_station_data();
+                //StationDataManager.StationDataMngr.read_station_data();
 
                 Station.StationService.GetInstance().Load(Protocols.StationDataPath);
             }
